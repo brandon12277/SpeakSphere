@@ -1,0 +1,24 @@
+.page_head{
+    font-family: 'Petit Formal Script', cursive;
+    font-size:200%;
+    
+}
+.cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:95%;
+    height:70vh;
+    box-shadow: inset #1c1c1c 0px 0px 2px;
+    background-color: rgb(249, 249, 249);
+    font-family: 'Petit Formal Script', cursive;
+
+}

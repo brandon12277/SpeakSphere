@@ -2,8 +2,9 @@ const express= require("express")
 const mongoose = require("mongoose")
 const morgan = require("morgan")
 const dotenv = require("dotenv")
-dotenv.config({path: './config.env'})
+dotenv.config({path: './config/config.env'})
 const bodyParser = require('body-parser');
+const cors = require('cors'); 
 
 const app = express()
 port = process.env.PORT || 5000
@@ -12,6 +13,7 @@ port = process.env.PORT || 5000
 
 const router = require('./Routes/index');
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/db', router);
 
 

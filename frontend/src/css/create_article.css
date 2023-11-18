@@ -1,0 +1,176 @@
+body,html{
+    width:100%;
+    height:100%;
+    margin : 0;
+    padding:0;
+ 
+ }
+ .homepage{
+    width:100%;
+    
+    margin : 0;
+    padding:0;
+ }
+
+ .createArticle{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+   width:100%;
+   height:90vh;
+  
+}
+.article_form{
+    width:70%;
+    height:100%;
+    margin-top: 1%;
+    border: 2px solid #78081C;
+    border-radius: 0.45em;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+   
+    
+    
+    
+}
+
+.img_div{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:80%;
+    height:30vh;
+    margin-top: 2%;
+    border: 1px solid #1c1c1c;
+    background-size: cover;
+    background-repeat: no-repeat;
+  background-attachment: fixed; /* optional: fixes the background image */
+  background-position: center center;
+}
+.img_div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  input{
+    border:none;
+    border-bottom: 2px solid #78081C;
+    border-radius: 0;
+    outline:none;
+    font-family: 'Montaga', serif;
+    background-color: rgb(248, 248, 248);
+  }
+
+
+  .article_name_descp{
+    margin-top: 5%;
+    width:80%;
+  }
+
+  .responsive-textarea {
+    margin-top: 5%;
+    width: 95%; /* Make the textarea take up 100% of the container width */
+    height: 200px; /* Set an initial height; it will adjust based on content */
+    resize:vertical; /* Allow vertical resizing */
+    padding: 10px; /* Add some padding for better visual appearance */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 16px; /* Set the font size */
+    outline: none;
+    font-family: 'Montaga', serif;
+    border:none;
+    border-bottom : 2px solid #78081C;
+    background-color: rgb(248, 248, 248);
+  }
+
+  .submit{
+    background-color: #78081C ;
+    margin-top: 2%;
+    color: white;
+    padding: 2% 4% 2% 4%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .design_bar{
+    background-color: #78081C;
+    display: flex;
+    width:100%;
+    height:5%;
+  }
+  
+  .dots{
+    display: flex;
+    gap:1%;
+    margin:1%;
+  }
+  .fa-circle{
+    color:white;
+  }
+  .preview{
+    
+   display: flex;
+    
+    justify-content: flex-end;
+   
+   width:100%;
+  }
+  .pre_butt{
+    display: flex;
+   align-items: center;
+   background: none;
+    border:none;
+    border-radius: none;
+    gap:2%;
+    outline:none;
+    cursor: pointer;
+    color:white;
+    
+    
+  }
+
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #78081C transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .loading{
+    display:none;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Montaga', serif;
+    font-size: large;
+  }

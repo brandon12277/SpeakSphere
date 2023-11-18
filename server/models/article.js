@@ -1,6 +1,11 @@
 const mongoose = require("mongoose")
 const ArticleSchema = new mongoose.Schema({
-      
+   firebaseUid: {
+    type: String,
+  },
+  username: {
+    type: String,
+  },
     article_name : {
         type: String,
         required  : [true]
@@ -12,22 +17,61 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
         required  : [true]
     },
-    upvotes : {
-        type : Number,
-        required : [true]
-    },
-    downvotes : {
-        type : Number,
-        required : [true]
-    },
-    changedvotes : {
-        type : Number,
-        required : [true]
-    },
-    neutralvotes : {
-        type : Number,
-        required : [true]
-    }
+    comments: [
+        {
+          user: {
+            userId: {
+              type: String,
+            },
+            username: String,
+          },
+          content: String,
+          replies: [
+            {
+              user: {
+                userId: {
+                  type: String,
+                  
+                },
+                username: String,
+              },
+              content: String,
+            },
+          ],
+        },
+      ],
+
+    upvotes : [
+        {
+          userId: {
+            type: String,
+            
+          },
+        },
+      ],
+    downvotes : [
+        {
+          userId: {
+            type: String,
+           
+          },
+        },
+      ],
+    changedvotes : [
+        {
+          userId: {
+            type: String,
+            
+          },
+        },
+      ],
+    neutralvotes :[
+        {
+          userId: {
+            type: String,
+          },
+        },
+      ]
     
 
 });
