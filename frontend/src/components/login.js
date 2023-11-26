@@ -15,7 +15,7 @@ export function Login(){
   
 
   const navigate = useNavigate();
-
+  const url = localStorage.getItem('url')
   const [formData, setFormData] = useState({
     
     username: '',
@@ -43,6 +43,9 @@ export function Login(){
   };
 
   const handleLogin = async () => {
+    
+    document.querySelectorAll(".signup")[0].style.display = "none"; 
+    document.querySelectorAll(".onload")[0].style.display = "block"; 
     try {
       axios.post('http://localhost:3000/db/ValidateUser',formData)
       .then(async (res)=>{
@@ -51,15 +54,28 @@ export function Login(){
       const user = userCredential.user;
       localStorage.setItem('token', user.uid);
       localStorage.setItem('isauth', true);
+      console.log(url)
+      document.querySelectorAll(".signup")[0].style.display = ""; 
+      document.querySelectorAll(".onload")[0].style.display = "none"; 
+      if(!url)
       navigate("/Account")
+    else
+    navigate(url)
+   
+    localStorage.removeItem('url')
+
       })
       .catch(err=>{
+        document.querySelectorAll(".signup")[0].style.display = ""; 
+    document.querySelectorAll(".onload")[0].style.display = "none"; 
         document.getElementById("error").innerHTML = "Wrong Username or Password"
       })
 
       
       
     } catch (error) {
+      document.querySelectorAll(".signup")[0].style.display = ""; 
+    document.querySelectorAll(".onload")[0].style.display = "none"; 
       document.getElementById("error").innerHTML = "Wrong Username or Password"
     }
   };
@@ -93,12 +109,18 @@ export function Login(){
         .then((res)=>{
           localStorage.setItem('token', user.uid);
           localStorage.setItem('isauth', true);
-        navigate("/Account")
+           if(!url)
+      navigate("/Account")
+    else
+    navigate(url)
         })
         .catch(err=>{
           localStorage.setItem('token', user.uid);
         localStorage.setItem('isauth', true);
-          navigate("/Account")
+             if(!url)
+           navigate("/Account")
+          else
+          navigate(url)
         })
         
          
@@ -155,6 +177,11 @@ export function Login(){
       <button className="signup" type="button" onClick={handleLogin}>
       Log in
       </button>
+      <div className="onload">
+      
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+           
+      </div>
       <div className="legend"><hr></hr><p className="non-highlight">Or Sign In using</p><hr></hr></div>
     <div className="socials">
        <button className="signup" onClick={loginWithGoogle }><i class="fa-brands fa-google"></i> Google</button>

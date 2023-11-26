@@ -19,18 +19,19 @@ export function UserHomePage(){
 
     const handleClick= async (e) => {
         let id = e.target.id 
+        console.log(id)
         document.getElementById("post").style.border = "none";
         document.getElementById("trending").style.border = "none";
         document.getElementById("upvote").style.border = "none";
         document.getElementById(id).style.borderBottom = "3px solid #ec1940";
 
-        if(id == "trending"){
+        if(id === "trending"){
             if(!trend){
                 const trendPosts = await axios.get('http://localhost:3000/db/FindTrending')
                 console.log(trendPosts.data)
                 const list = trendPosts.data.map(article => (
                     <PostCard
-                      
+                    id = {article._id}
                     article_name = {article.article_name}
                     description = {article.description}
                     image = {article.article_img}
@@ -53,13 +54,13 @@ export function UserHomePage(){
             
 
         }
-        else if(id == "upvote"){
+        else if(id === "upvote"){
             if(!upvoted){
                 const upvotedPosts = await axios.get('http://localhost:3000/db/FindMostVotes')
                 console.log(upvotedPosts.data)
                 const list = upvotedPosts.data.map(article => (
                     <PostCard
-                      
+                    id = {article._id}
                     article_name = {article.article_name}
                     description = {article.description}
                     image = {article.article_img}
@@ -91,7 +92,7 @@ export function UserHomePage(){
         
         const list = newposts.data.map(article => (
             <PostCard
-              
+            id = {article._id}
             article_name = {article.article_name}
             description = {article.description}
             image = {article.article_img}
@@ -132,8 +133,8 @@ useEffect(()=>{
 
 if(!user){
     return(
-        <div>
-            Loading
+        <div className="loading_page">
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
     )
 }

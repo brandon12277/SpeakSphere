@@ -22,7 +22,7 @@ body,html{
   
 }
 .article_form{
-    width:70%;
+    width:95%;
     height:100%;
     margin-top: 1%;
     border: 2px solid #78081C;
@@ -35,15 +35,22 @@ body,html{
     
     
 }
+p{
+  font-family: 'Inter', sans-serif;
+}
 
 .img_div{
+  cursor: pointer;
     display:flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width:80%;
-    height:30vh;
-    margin-top: 2%;
-    border: 1px solid #1c1c1c;
+    width:90%;
+    height:25vh;
+    margin-top: 1%;
+    color:rgb(160, 160, 160);
+    background-color: rgb(240, 240, 240);
+    font-family: 'Inter', sans-serif;
     background-size: cover;
     background-repeat: no-repeat;
   background-attachment: fixed; /* optional: fixes the background image */
@@ -60,29 +67,13 @@ body,html{
     border-bottom: 2px solid #78081C;
     border-radius: 0;
     outline:none;
-    font-family: 'Montaga', serif;
-    background-color: rgb(248, 248, 248);
+    font-family: 'Inter', sans-serif;
   }
 
 
   .article_name_descp{
-    margin-top: 5%;
-    width:80%;
-  }
-
-  .responsive-textarea {
-    margin-top: 5%;
-    width: 95%; /* Make the textarea take up 100% of the container width */
-    height: 200px; /* Set an initial height; it will adjust based on content */
-    resize:vertical; /* Allow vertical resizing */
-    padding: 10px; /* Add some padding for better visual appearance */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    font-size: 16px; /* Set the font size */
-    outline: none;
-    font-family: 'Montaga', serif;
-    border:none;
-    border-bottom : 2px solid #78081C;
-    background-color: rgb(248, 248, 248);
+   
+    width:90%;
   }
 
   .submit{
@@ -104,6 +95,7 @@ body,html{
   
   .dots{
     display: flex;
+    width:100%;
     gap:1%;
     margin:1%;
   }
@@ -173,4 +165,9 @@ body,html{
     justify-content: center;
     font-family: 'Montaga', serif;
     font-size: large;
+  }
+  label{
+    display: flex;
+    position:absolute;
+
   }

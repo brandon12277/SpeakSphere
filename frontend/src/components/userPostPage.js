@@ -21,7 +21,7 @@ export function UserPostPage(){
         
         const list = article_pulled.data.map(article => (
                 <PostCard
-                  
+                id = {article._id}
                 article_name = {article.article_name}
                 description = {article.description}
                 image = {article.article_img}
@@ -33,7 +33,7 @@ export function UserPostPage(){
                
               
         ))
-  console.log(list)
+  
         
 
         setuser(userCred.data)
@@ -56,8 +56,8 @@ export function UserPostPage(){
 
 if(!user && articleList === null){
     return(
-        <div>
-            Loading
+        <div className="loading_page">
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
     )
 }

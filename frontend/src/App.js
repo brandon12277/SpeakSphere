@@ -8,6 +8,9 @@ import { UserHomePage } from "./components/userHomePage";
 import { NewArticle } from "./components/new_article";
 import { PostCard } from "./components/postCard";
 import { UserPostPage } from "./components/userPostPage";
+import { Article } from "./components/ArticleDisplay";
+import { ArticleCard } from "./components/ArticleCard";
+import Comment_Box from "./components/CommentBox";
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
         <Route path="/Account" element={<UserHomePage />} />
         <Route path="/Account/NewArticle" element={<NewArticle/>} />
         <Route path="/Account/my-posts" element={<UserPostPage/>} />
+        <Route path="/:article/:id" element={<Article/>} />
+        <Route path="/test" element={<Comment_Box/>} />
         
        </Routes>
     </Router>

@@ -16,7 +16,7 @@ export function LandingPage(){
     const [random,setRandom] = useState(null);
     const [trend,setTrend] = useState(null);
     const [upvoted,setMost] = useState(null);
-
+    
     const handleClick= async (e) => {
         let id = e.target.id 
         document.getElementById("post").style.border = "none";
@@ -29,7 +29,7 @@ export function LandingPage(){
                 const trendPosts = await axios.get('http://localhost:3000/db/FindTrending')
                 const list = trendPosts.data.map(article => (
                     <PostCard
-                      
+                    id = {article._id}
                     article_name = {article.article_name}
                     description = {article.description}
                     image = {article.article_img}
@@ -57,7 +57,7 @@ export function LandingPage(){
                 const upvotedPosts = await axios.get('http://localhost:3000/db/FindMostVotes')
                 const list = upvotedPosts.data.map(article => (
                     <PostCard
-                      
+                    id = {article._id}
                     article_name = {article.article_name}
                     description = {article.description}
                     image = {article.article_img}
@@ -82,12 +82,14 @@ export function LandingPage(){
     }
 
  async function fetchData(){
+    localStorage.removeItem('url')
+    TextTickingAnimation()
     try{
         let newposts = await axios.get('http://localhost:3000/db/FindRandomPosts')
         
         const list = newposts.data.map(article => (
             <PostCard
-              
+            id = {article._id}
             article_name = {article.article_name}
             description = {article.description}
             image = {article.article_img}
@@ -98,7 +100,7 @@ export function LandingPage(){
             />
            
           
-    ))
+        ))
 
         setRandom(list)
         setPosts(list)
@@ -128,7 +130,7 @@ export function LandingPage(){
         },100)
     }
     
-    useEffect(fetchData,TextTickingAnimation,[])
+    useEffect(fetchData,[])
      return (
         <div className = "cont">
              <Navbar/>

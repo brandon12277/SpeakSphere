@@ -29,6 +29,21 @@ router.route("/FindTrending")
 router.route("/FindMostVotes")
 .get(articleController.findMostUpvoted)
 
+
+router.route("/FindArticle")
+.get(articleController.FindSpecificArticle)
+
+router.route("/CheckVotestatus")
+.get(articleController.CheckVotestatus)
+
+
+
+router.post("/handlevote",articleController.handleVote)
+
+router.post("/AddComment",articleController.AddComment)
+
+router.post("/AddReply",articleController.AddReply)
+
 router.route("/ValidateUser")
 .post(userController.validateUserCredentials)
 
@@ -36,5 +51,7 @@ router.route("/ValidateNewUser")
 .post(userController.validateNewUser)
 
 router.post("/addArticles",upload.single('file'),articleController.addArticles)
+
+
 
 module.exports = router

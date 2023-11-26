@@ -58,12 +58,12 @@ body,html{
  .dropdown-content {
    display: none;
    flex-direction: column;
-   gap:10%;
+   
    position: absolute;
    background:none;
    border:none;
    border-radius: 0.45em;
-   padding:1%;
+   padding:0.5%;
    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
    z-index: 1;
  }
@@ -72,6 +72,7 @@ body,html{
    float: none;
    color: white;
    padding:10px;
+   margin: 1%;
    text-decoration: none;
    display: block;
    text-align: left;
@@ -97,4 +98,5 @@ body,html{
  
  .dropdown:hover .dropdown-content {
    display: flex;
+   gap:2%;
  }

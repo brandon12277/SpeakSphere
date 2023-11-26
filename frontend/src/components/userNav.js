@@ -2,13 +2,21 @@ import {React,useEffect,useState} from 'react';
 import logo from "../static/logo.png"
 import "../css/navbar.css"
 import axios from "axios"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 export function UserNav(props){
     const navigate = useNavigate();
+    
     const handleLogout = () =>{
+      const url = localStorage.getItem('url')
         localStorage.removeItem('isauth')
         localStorage.removeItem('token')
+        if(url)
+        window.location.reload()
+        else
         navigate("/")
+
+        localStorage.removeItem('url')
+       
         
     }
      return (

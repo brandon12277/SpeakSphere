@@ -1,0 +1,98 @@
+.comment_div{
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+    align-items: center;
+    justify-content: center;
+    display:flex;
+}
+.comment_box{
+    font-family: 'Inter', sans-serif;
+    
+}
+.user-details{
+    display:flex;
+    align-items: center;
+    gap:2%;
+}
+.content{
+    margin:1%;
+    font-family: 'Inter', sans-serif;
+}
+.tag{
+   border-radius:0.45em;
+   padding:2%;
+   color:white;
+   background-color: #78081C;
+}
+.comment_foot{
+    width:80%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+}
+
+.name_det{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    gap:5%;
+}
+
+.Support{
+    border-radius: 0.45em;
+    padding:2%;
+    color:white;
+    background-color: #78081C;
+    font-weight: 300;
+
+}
+
+.Against{
+    border-radius: 0.45em;
+    padding:1% 2% 1% 2%;
+    color:#1c1c1c;
+    background-color: rgb(219, 219, 219);
+    font-weight: 300;
+
+}
+
+.replies_butt{
+    font-family: 'Inter', sans-serif;
+    background: none;
+    color:#78081C;
+    cursor: pointer;
+    border: none;
+    font-weight: 700;
+}
+
+#reply_div_comments{
+    width:90%;
+    margin-top:1%;
+    display: none;
+    align-items: center;
+    justify-content: end;
+}
+#reply_div{
+    display: none;
+
+}
+
+#comment_butt{
+    display: flex;
+    background: none;
+    cursor: pointer;
+    gap:2%;
+    font-family: 'Inter', sans-serif;
+    font-size: larger;
+    background-color : #78081C;
+    border:1px solid #78081C;
+    padding:0.5%;
+    color:white;
+    border-radius: 0.45em;
+}
+.replies{
+    display:none;
+}

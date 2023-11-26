@@ -5,12 +5,18 @@ import photo from "../static/thinker.jpg"
 import { UserNav } from './userNav';
 import { useNavigate } from 'react-router-dom';
 import no_photo from "../static/no_photo.jpg"
+import no_profile from "../static/no-profile.png"
+
 
 export function PostCard(props){
     const navigate = new useNavigate()
+    
+
     const handleClick = () =>{
-           navigate("/Account")
-    }
+     
+           window.location.href=`/${props.article_name}/${props.id}`
+      }
+          
     return(
        
 
@@ -21,11 +27,11 @@ export function PostCard(props){
            
               <div className="name_descp">
                  <h2 id="heading">{props.article_name}</h2>
-                 <p id="descp">
+                 <p id="descp" dangerouslySetInnerHTML={{ __html: props.description }}>
                  
-                   {props.description}
+                   {/* {props.description} */}
                  </p>
-                 <a href="">Learn More</a>
+                 <a href={`/${props.article_name}/${props.id}`}>Learn More</a>
               </div>
               {
                 props.image?
@@ -38,7 +44,7 @@ export function PostCard(props){
 
               <div className="stats">
               <div className="details">
-              <i style={{color:"rgb(63, 63, 63)"}} class="fa-solid fa-user-large"></i>{props.name}
+              <img style={{width:"50px",height:"auto"}} src={no_profile}></img>{props.name}
                 </div>
                 <div className="details">
                    <i style={{color:"red"}} class="fa-solid fa-hand-fist"></i>{props.upvotes} Supporters

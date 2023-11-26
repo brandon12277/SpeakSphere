@@ -2,7 +2,6 @@ const User  = require("./../models/user")
 
 exports.createUser = async (req,res) => {
    try{
-    console.log(req.body)
     const user = await User.create(req.body)
     console.log(user)
     res.status(200).json(user)
@@ -17,7 +16,6 @@ exports.createUser = async (req,res) => {
 }
 exports.Finduser = async (req,res)=>{
     try{
-       console.log(req.query.userid)
         const finduser = {
             firebaseUid  : req.query.userid
         }

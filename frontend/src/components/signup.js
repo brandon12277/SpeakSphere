@@ -26,12 +26,54 @@ export function SignUpPage(){
     phone: '',
     
   });
+  function validatePassword() {
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+    var message = document.getElementById('passwordMatchMessage');
 
+    var icon = document.createElement('span');
+    
+    if (password === confirmPassword) {
+        icon.innerHTML = '✓ Passwords match';
+        icon.className = 'valid';
+    } else {
+        icon.innerHTML = '✗ Passwords do not match';
+        icon.className = 'invalid';
+    }
+
+    // Clear previous content
+    message.innerHTML = '';
+
+    // Append the icon to the message paragraph
+    message.appendChild(icon);
+}
+  function formatPhoneNumber(phoneNumber) {
+    return phoneNumber.replace(/(\d{4})(\d{3})(\d{3})/, '$1-$2-$3');
+}
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
+    });
+  };
+
+  const handleChangePhone = (e) => {
+    const { name, value } = e.target;
+    var phoneNumber = value.replace(/\D/g, '');
+
+    if (phoneNumber.length > 10) {
+        phoneNumber = phoneNumber.slice(0, 10);
+    }
+
+    
+    var formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+
+    
+    e.value = formattedPhoneNumber;
+    setFormData({
+      ...formData,
+      [name]: formattedPhoneNumber,
     });
   };
 
@@ -50,7 +92,8 @@ export function SignUpPage(){
   const handleSignup = async () => {
     try {
        
-      
+      document.querySelectorAll(".signup")[0].style.display = "none"; 
+    document.querySelectorAll(".onload")[0].style.display = "block"; 
       axios.post('http://localhost:3000/db/ValidateNewUser',formData)
       .then(async (res)=>{
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password);
@@ -73,12 +116,16 @@ export function SignUpPage(){
         })
         .catch(err=>{
           console.log(err)
+          document.querySelectorAll(".signup")[0].style.display = ""; 
+          document.querySelectorAll(".onload")[0].style.display = "none"; 
           document.getElementById("error").innerHTML = err.data
         })
        
         
       })
       .catch(async err=>{
+        document.querySelectorAll(".signup")[0].style.display = ""; 
+    document.querySelectorAll(".onload")[0].style.display = "none";  
         console.log(err)
         if(err.response)
         document.getElementById("error").innerHTML =err.response.data
@@ -165,6 +212,7 @@ export function SignUpPage(){
           id="name"
           name="name"
           value={formData.name}
+          required
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -177,6 +225,7 @@ export function SignUpPage(){
           type="text"
           id="username"
           name="username"
+          required
           value={formData.username}
           onChange={handleChange}
           onFocus={handleFocus}
@@ -190,6 +239,7 @@ export function SignUpPage(){
           type="email"
           id="email"
           name="email"
+          required
           value={formData.email}
           onChange={handleChange}
           onFocus={handleFocus}
@@ -203,8 +253,9 @@ export function SignUpPage(){
           type="tel"
           id="mobile"
           name="phone"
+          maxlength="10"
           value={formData.phone}
-          onChange={handleChange}
+          onChange={handleChangePhone}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
@@ -216,6 +267,7 @@ export function SignUpPage(){
           type="password"
           id="password"
           name="password"
+          required
           value={formData.password}
           onChange={handleChange}
           onFocus={handleFocus}
@@ -229,16 +281,22 @@ export function SignUpPage(){
           type="password"
           id="confirmPassword"
           name="confirmPassword"
-          
-          // onChange={}
+          required
+          onChange={validatePassword}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
       </div>
+      <p id="passwordMatchMessage"></p>
 
       <button className="signup" type="button" onClick={handleSignup}>
        Sign up
       </button>
+      <div className="onload">
+      
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+           
+      </div>
     </div>
     <div className="legend"><hr></hr><p className="non-highlight">Or Sign In using</p><hr></hr></div>
     <div className="socials">

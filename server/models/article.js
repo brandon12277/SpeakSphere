@@ -26,6 +26,7 @@ const ArticleSchema = new mongoose.Schema({
             username: String,
           },
           content: String,
+          choice : String,
           replies: [
             {
               user: {
@@ -36,6 +37,7 @@ const ArticleSchema = new mongoose.Schema({
                 username: String,
               },
               content: String,
+              choice : String,
             },
           ],
         },
