@@ -11,16 +11,16 @@ from urllib import request as req
 import sklearn
 from PIL import Image
 from io import BytesIO
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.inception_v3 import preprocess_input, decode_predictions
+from keras.models import load_model
+from keras.preprocessing.image import load_img,img_to_array
+from keras.applications.inception_v3 import preprocess_input, decode_predictions
 
 
 app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
 
 all_stopwords = stopwords.words('english')
-cnn = load_model('image_filter_2.h5')
+cnn = joblib.load('image_filter.h5')
 model_tree = joblib.load('text_filter_svc.h5')
 
 @app.route('/image_filter',methods=['POST'])
@@ -46,14 +46,12 @@ def filter():
             img = Image.open(BytesIO(binary_data))
 
             # Resize the image to 64x64
+           
             img = img.resize((64, 64))
-
             # Convert the resized image back to a NumPy array
-            resized_img_array = image.img_to_array(img)
-
-            # Expand the dimensions to match the input shape of your model
-            resized_img_array = np.expand_dims(resized_img_array, axis=0)
-
+            keras_array = np.array(img)  # Adjust target_size as needed
+            keras_array = img_to_array(keras_array)
+            resized_img_array = np.expand_dims(keras_array, axis = 0)
             # Preprocess the resized input image
     
             result = cnn.predict(resized_img_array)

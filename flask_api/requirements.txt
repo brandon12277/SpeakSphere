@@ -1,6 +1,6 @@
 Flask
 scikit-learn
-tensorflow-cpu
+keras
 pandas
 numpy
 flask_cors
