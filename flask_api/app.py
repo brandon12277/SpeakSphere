@@ -1,7 +1,5 @@
 from flask import Flask, jsonify,request
 import numpy as np 
-import pandas as pd 
-import matplotlib.pyplot as plt 
 from flask_cors import CORS
 import joblib
 import re
@@ -23,6 +21,7 @@ CORS(app, origins="*", supports_credentials=True)
 
 all_stopwords = stopwords.words('english')
 cnn = load_model('image_filter_2.h5')
+model_tree = joblib.load('text_filter_svc.h5')
 
 @app.route('/image_filter',methods=['POST'])
 def filter():
@@ -87,7 +86,7 @@ def simple():
         text = request.json
         text = text.get('description')
         text_data= []
-        model_tree = joblib.load('text_filter_svc.h5')
+        
         vectorizer_text = joblib.load('vectorizer.joblib')
         text_array = text.split('.')    
         length = len(text_array)
