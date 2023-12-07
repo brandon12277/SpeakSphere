@@ -12,15 +12,15 @@ import sklearn
 from PIL import Image
 from io import BytesIO
 from keras.models import load_model
-from keras.preprocessing.image import load_img,img_to_array
+from keras.preprocessing import image
 from keras.applications.inception_v3 import preprocess_input, decode_predictions
-
+import base64
 
 app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
 
 all_stopwords = stopwords.words('english')
-cnn = joblib.load('image_filter.h5')
+cnn = load_model('image_filter_2.h5')
 model_tree = joblib.load('text_filter_svc.h5')
 
 @app.route('/image_filter',methods=['POST'])
@@ -37,21 +37,23 @@ def filter():
 
 
        
-            res = req.urlopen(image_url)
-            binary_data = res.read()
+            
 
        
-            image_array = np.frombuffer(binary_data, dtype=np.uint8) 
-            # Decode the image using PIL (Pillow)
-            img = Image.open(BytesIO(binary_data))
+            
+            image_bytes = base64.b64decode(image_url.split(",")[1])
 
-            # Resize the image to 64x64
-           
-            img = img.resize((64, 64))
-            # Convert the resized image back to a NumPy array
-            keras_array = np.array(img)  # Adjust target_size as needed
-            keras_array = img_to_array(keras_array)
-            resized_img_array = np.expand_dims(keras_array, axis = 0)
+            image_pil = Image.open(BytesIO(image_bytes))
+
+            # Resize the image to (64, 64)
+            #image_pil_resized = image_pil.resize((64, 64))
+            image_pil_resized = image.load_img(BytesIO(image_bytes), target_size = (64, 64))
+            # Convert the resized PIL Image to a NumPy array
+            image_np_resized = image.img_to_array(image_pil_resized)
+
+            # Expand the dimensions to match the input shape of your model
+            resized_img_array = np.expand_dims(image_np_resized, axis=0)
+
             # Preprocess the resized input image
     
             result = cnn.predict(resized_img_array)
