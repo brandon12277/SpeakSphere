@@ -4,7 +4,6 @@ from flask_cors import CORS
 import joblib
 import re
 import nltk
-nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from urllib import request as req
@@ -15,11 +14,14 @@ from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.inception_v3 import preprocess_input, decode_predictions
 import base64
+import os
 
 app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
+all_stopwords = ""
+with open("english_stopwords.txt", 'r') as file:
+    all_stopwords = set(file.read().splitlines())
 
-all_stopwords = stopwords.words('english')
 cnn = load_model('image_filter_2.h5')
 model_tree = joblib.load('text_filter_svc.h5')
 
