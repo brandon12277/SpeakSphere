@@ -137,7 +137,7 @@ export default function Comment_Box(props){
                        <div></div>
                     :
                     <div className="comment_foot">
-                      <button onClick={handleReplyDisplay} style={{cursor:"pointer",display:"flex",padding:"0%",outline:"0",background:"none",border:"none"}}><h4>Replies</h4></button>
+                      <button onClick={handleReplyDisplay} style={{cursor:"pointer",display:"flex",padding:"0%",outline:"0",background:"none",border:"none"}}><h4>Replies({props.replies.length})</h4></button>
                       <div className="replies" id={reply_div_bar}>
                       {child_reply.map((child) => (
                                child

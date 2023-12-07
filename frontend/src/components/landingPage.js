@@ -4,6 +4,7 @@ import { Navbar } from './navbar';
 import "../css/landing.css"
 import axios from "axios"
 import { PostCard } from './postCard';
+import Footer from './Footer';
 
 
 
@@ -19,6 +20,7 @@ export function LandingPage(){
     
     const handleClick= async (e) => {
         let id = e.target.id 
+        if(!id)id = e.target
         document.getElementById("post").style.border = "none";
         document.getElementById("trending").style.border = "none";
         document.getElementById("upvote").style.border = "none";
@@ -82,6 +84,7 @@ export function LandingPage(){
     }
 
  async function fetchData(){
+    document.getElementById("root").style.overflowY = "auto"
     localStorage.removeItem('url')
     TextTickingAnimation()
     try{
@@ -134,15 +137,15 @@ export function LandingPage(){
      return (
         <div className = "cont">
              <Navbar/>
-             <div className="top-component">
-                 <h3 className= "quote"></h3>
+             <div  style={{zIndex:"0"}}className="top-component">
+                 <h3 style={{zIndex:"0"}} className= "quote"></h3>
                  <button className="SignUp"><a className="nav-link" href="/Register">Sign Up For Free</a></button>
              </div>
              <div className="bottom-component">
               <div className="bottom-nav">
-                 <button style={{borderBottom:"3px solid #ec1940"}} onClick={handleClick} id="post" className="bottom-nav-link"><i class="fa-solid fa-globe"></i> Posts</button>
-                 <button onClick={handleClick} id="trending" className="bottom-nav-link"><i class="fa-solid fa-arrow-trend-up"></i> Trending</button>
-                 <button  onClick={handleClick} id="upvote" className="bottom-nav-link"><i class="fa-solid fa-arrow-up-short-wide"></i> Most Upvoted</button>
+                 <button style={{borderBottom:"3px solid #ec1940"}} onClick={handleClick} id="post" className="bottom-nav-link"><i onClick={handleClick} id="post" class="fa-solid fa-globe"></i> Posts</button>
+                 <button onClick={handleClick} id="trending" className="bottom-nav-link"><i onClick={handleClick} id="trending" class="fa-solid fa-arrow-trend-up"></i > Trending</button>
+                 <button  onClick={handleClick} id="upvote" className="bottom-nav-link"><i onClick={handleClick} id="upvote" class="fa-solid fa-arrow-up-short-wide"></i> Most Upvoted</button>
               </div>
              </div>
              <div className="post_landing_page">
@@ -157,6 +160,7 @@ export function LandingPage(){
              
               
            </div>
+          
         </div>
      )
 }

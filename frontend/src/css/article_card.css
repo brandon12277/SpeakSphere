@@ -9,7 +9,7 @@
    
     
     font-family: 'Lato', sans-serif;
-    font-size: 250%;
+    font-size: 200%;
     font-weight: 900;
 }
 
@@ -29,11 +29,11 @@
 }
 
 .description_field{
-    width:80%;
+    width:95%;
     padding:1%;
     border-radius: 0.45em;
     font-weight: 400;
-    font-size:larger;
+    font-size:medium;
     margin-top: 7%;
     margin-bottom: 7%;
     font-family: 'Inter', sans-serif;
@@ -42,7 +42,7 @@
 .choice_buttons{
     width:100%;
     display: flex;
-    gap:50%;
+    gap:40%;
     margin-top: 1%;
 }
 
@@ -155,14 +155,14 @@
     display: none;
     background-color: white;
     border-radius: 0.45em;
-    padding: 5%;
+    padding: 3%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     font-family: 'Inter', sans-serif;
 }
 
-.blackscreen{
+.blackscreen,.black{
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -173,5 +173,19 @@
     background: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
     display: none;
 }
+
+@media screen and (max-width: 640px) {
+    .statistical{
+       flex-direction: column;
+      
+       
+    }
+    .article_img{
+        width:100%;
+    }
+    .upvote_butt,.downvote_butt{
+        padding:2%;
+    }
+  }
 
 

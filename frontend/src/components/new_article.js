@@ -5,6 +5,7 @@ import { UserNav } from './userNav';
 import { useNavigate } from 'react-router-dom';
 
 import RichTextEditor from './RichTextEditor';
+import Footer from './Footer';
 
 export function NewArticle(){
     
@@ -13,6 +14,7 @@ export function NewArticle(){
     const navigate = useNavigate();
    console.log(isauth)
    const fileInputRef = useRef(null);
+   const [inputVal,setVal] = useState("")
     const [user,setuser] = useState("");
     const [file,setFile] = useState(null)
     const [formData, setFormData] = useState({
@@ -42,6 +44,7 @@ export function NewArticle(){
     const { name, value } = e.target;
     
     const selectedFile = e.target.files[0];
+    console.log(selectedFile)
    
     setFile(selectedFile);
       console.log(formData)
@@ -57,16 +60,115 @@ export function NewArticle(){
       reader.readAsDataURL(selectedFile);
     }
   };
+  const highlightText = (content) => {
+    // You can customize the highlighting logic based on your requirements
+    const highlightedValue = `<span style="background-color: yellow">${content}</span>`;
+    
+    // Set the highlighted value to a div or span
+    return <div dangerouslySetInnerHTML={{ __html: highlightedValue }} />;
+  };
 
   const handleSubmit = async () =>{
     try{
+      let len = formData.description
+      .replace(/<[^>]*>/g, ' ') // Remove HTML tags
+      .split(/\s+/)
+      .filter(Boolean)
+      .length
+      console.log(formData.description
+        .replace(/<[^>]*>/g, ' ') // Remove HTML tags
+        .split(/\s+/)
+        .filter(Boolean)
+        .length)
+      if(formData.name == '' || formData.description == '' || len<100){
+        if(formData.name == '')document.getElementById("name_warn").style.display = "flex";
+        return;
+      }
        document.querySelectorAll(".article_form")[0].style.display = "none";
        document.querySelectorAll(".loading")[0].style.display = "flex";
         let form_data = formData
+        let text = getPlainText(formData.description)
+        console.log(text)
         form_data["file"]=file
         form_data["firebaseUid"] = userid
         form_data["username"] = user.username
         console.log(form_data)
+        let check_form_photo = {
+          "image" : formData.image
+        }
+        let check_form_name = {
+          "description" : formData.name
+        }
+        let check_form = {
+          "description" : text
+        }
+        if(formData.image == ""){
+         
+        }
+        const check_img = await axios.post('http://127.0.0.1:5000/image_filter',check_form_photo)
+        const check_name = await axios.post('http://127.0.0.1:5000/simple',check_form_name)
+        const check_descp = await axios.post('http://127.0.0.1:5000/simple',check_form)
+
+        let name = check_name.data.message
+        let descp = check_descp.data.message
+        let class_label = check_img.data.class
+        console.log(descp)
+        console.log(class_label)
+        if(class_label == 0 ||  class_label ==2){
+          document.querySelectorAll(".loading")[0].style.display = "none";
+          document.querySelectorAll(".blackscreen_warning")[0].style.display = "block" 
+          document.getElementById("ar_img").style.display = "flex" 
+        }
+        if(name.length>0){
+          document.querySelectorAll(".loading")[0].style.display = "none";
+             document.querySelectorAll(".blackscreen_warning")[0].style.display = "block" 
+             document.getElementById("ar_name").style.display = "block" 
+            
+             document.getElementById("article_name").style.backgroundColor = "#fdeb37"
+             
+        }
+        if(descp.length>0){
+          document.querySelectorAll(".loading")[0].style.display = "none";
+          document.querySelectorAll(".blackscreen_warning")[0].style.display = "block" 
+          document.getElementById("ar_descp").style.display = "block" 
+          let descp_p = document.getElementById("descp_ml");
+          let text = getPlainText(formData.description).split('.')
+          let defined = formData.description.split('.')
+          let descp_text =document.createElement('p')
+          let itr = 0;
+          text.map((elem,idx)=>{
+            let spanElem = document.createElement('span')
+            spanElem.style.backgroundColor = "#fdeb37"
+            spanElem.textContent= elem+"."
+            console.log(idx)
+            if(idx === descp[itr]){
+              <span style={{backgroundColor:"#fdeb37"}}>{formData.name}</span>
+              console.log(defined[idx])
+              defined[idx] = "<span style='background-color:#fdeb37'>"+defined[idx]+"</span>"
+              descp_p.append(spanElem)
+              itr++;
+              console.log("it entered")
+            }
+            else{
+              spanElem.style.backgroundColor = ""
+              descp_p.append(spanElem)
+              
+            }
+            
+          })
+
+          let final_def = defined.join('.')
+          handleEditorChange(final_def)
+
+
+          
+            
+          
+         
+
+     }
+     if(name.length>0 || descp.length>0 || class_label == 0 || class_label == 2)return;
+
         let article = await axios.post('http://localhost:3000/db/addArticles',form_data,{
             headers: {
               'Content-Type': 'multipart/form-data',
@@ -84,12 +186,23 @@ export function NewArticle(){
   }
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name,value)
+    if(name === "name" && value===''){
+      console.log("hi there")
+      document.getElementById("article_name").style.backgroundColor = "white"
+    }
     setFormData({
       ...formData,
       [name]: value,
     });
   };
-  
+  const getPlainText = (html) => {
+    // Create a temporary element to parse the HTML content
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = html;
+    // Extract the text content
+    return tempElement.textContent || tempElement.innerText || '';
+  };
   const handleEditorChange = (content) => {
     setFormData({
       ...formData,
@@ -117,7 +230,35 @@ if(!user){
     )
 }
 return (
+  <div>
+   <div className="blackscreen_warning">
+     <div className="warning_ml">
+       <p className="warn_header"><i class="fa-solid fa-triangle-exclamation"></i><br></br>There was some innappropriate content detected in your article</p>
+     </div>
+     <div id="ar_img">
     
+          <img src={formData.image} style={{height:"250px",width:"auto"}}></img>
+     </div>
+     <div id="ar_name">
+          <h4>Article Name</h4>
+          <span style={{backgroundColor:"#fdeb37"}}>{formData.name}</span>
+     </div>
+     <div id="ar_descp">
+        <h4>Article Description</h4>
+        <div id="descp_ml"></div>
+     </div>
+     <div id="ar_button">
+        <button onClick={()=>{
+          document.querySelectorAll(".blackscreen_warning")[0].style.display="none"
+          document.querySelectorAll("#ar_name")[0].style.display="none"
+          document.querySelectorAll("#ar_descp")[0].style.display="none"
+          document.querySelectorAll(".article_form")[0].style.display = "flex";
+          
+        }} className="make_change">Make Changes</button>
+     </div>
+    
+   </div>
+  
     <div className="homepage">
       <UserNav
          user = {user}
@@ -146,8 +287,10 @@ return (
        
         <div className="article_name_descp">
           <p>Article Name</p>
-           <input   type="type" name="name" onChange={handleChange}></input>
-         
+           <input id="article_name" value={formData.name}  type="type" name="name" onChange={handleChange}></input>
+           <p id= "name_warn" style={{display:"none",color:"red"}}>
+          Article Name field is empty
+          </p>
            <RichTextEditor editorContent={formData.description} setEditorContent={handleEditorChange} />
            <button onClick={handleSubmit} className="submit">Create Post</button>
           
@@ -165,6 +308,8 @@ return (
     </div>
 
     </div>
+    
+  </div>
 )
 
 

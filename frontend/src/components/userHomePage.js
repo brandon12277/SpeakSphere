@@ -1,9 +1,11 @@
 import {React,useEffect,useState} from 'react';
 import axios from "axios"
 import "../css/userhome.css"
+import "../css/landing.css"
 import { UserNav } from './userNav';
 import { useNavigate } from 'react-router-dom';
 import { PostCard } from './postCard';
+import Footer from './Footer';
 
 export function UserHomePage(){
     
@@ -140,7 +142,7 @@ if(!user){
 }
 return (
     
-    <div className="homepage">
+    <div className="cont">
       <UserNav
          user = {user}
       />
@@ -151,7 +153,10 @@ return (
                  <button onClick={handleClick} id="trending" className="bottom-nav-link"><i class="fa-solid fa-arrow-trend-up"></i> Trending</button>
                  <button  onClick={handleClick} id="upvote" className="bottom-nav-link"><i class="fa-solid fa-arrow-up-short-wide"></i> Most Upvoted</button>
               </div>
-              <div className="posts">
+            
+
+    </div>
+    <div className="posts">
               {
                 !posts?
                 <div>
@@ -163,8 +168,7 @@ return (
              
               
            </div>
-
-    </div>
+   
     </div>
 )
 

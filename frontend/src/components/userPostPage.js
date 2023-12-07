@@ -4,6 +4,7 @@ import "../css/userpostpage.css"
 import { UserNav } from './userNav';
 import { useNavigate } from 'react-router-dom';
 import { PostCard } from './postCard';
+import Footer from './Footer';
 
 export function UserPostPage(){
     const userid = localStorage.getItem('token')

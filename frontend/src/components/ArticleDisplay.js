@@ -6,6 +6,7 @@ import { PostCard } from './postCard';
 import { Navbar } from './navbar';
 import { ArticleCard } from './ArticleCard';
 import { useParams } from 'react-router-dom';
+import Footer from './Footer';
 
 
 

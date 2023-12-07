@@ -3,6 +3,7 @@ body,html{
   height:100%;
   margin : 0;
   padding:0;
+  overflow-x:none;
 
 }
 
@@ -11,6 +12,20 @@ body,html{
   height:100%;
   margin : 0;
   padding:0;
+  overflow-x:none;
 
+}
+
+::-webkit-scrollbar {
+  width: 0.3rem; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #78081C;
+  /* Set the color of the scrollbar thumb (the moving part) */
+}
+
+::-webkit-scrollbar-track {
+  background:none/* Set the color of the scrollbar track (the area behind the thumb) */
 }
 

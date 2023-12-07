@@ -6,6 +6,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 
 
@@ -308,6 +309,7 @@ export function SignUpPage(){
    
     
   </div>
+  
 </div>
      )
 }

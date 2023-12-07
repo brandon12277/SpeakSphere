@@ -1,10 +1,10 @@
 
 
  .card_body{
-  width:60%;
+  width:70%;
   height:30%;
   padding:2%;
-  margin-bottom:1%;
+  margin-bottom:2%;
   box-shadow: #bbbbbb 0px 0px 4px;
   border-radius: 0.45em;
   display: flex;
@@ -20,6 +20,7 @@
  }
 
  .name_descp{
+  width:100%;
     display: flex;
     flex-direction: column;
     
@@ -46,6 +47,8 @@
 
  }
  #post_img{
+  display: flex;
+  justify-self: flex-end;
    width:250px;
    height:auto;
  }
@@ -63,5 +66,24 @@
    align-items: center;
    justify-content: center;
    gap:1%;
-   width:20%;
+   width:100%;
  }
+
+ @media screen and (max-width: 900px) {
+  .card_body{
+    width:80%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .card_body{
+    width:90%;
+  }
+
+  .context{
+    flex-direction: column;
+  }
+  #post_img{
+    width:auto;
+    height:200px;
+  }
+}

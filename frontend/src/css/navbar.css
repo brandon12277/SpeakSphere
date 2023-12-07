@@ -7,6 +7,7 @@ body,html{
  }
  .navbar{
     width:100%;
+    padding:1%;
     background-color: #78081C ;
     display:flex;
     justify-content: center;
@@ -22,13 +23,37 @@ body,html{
    align-items: center;
    
  }
+ .nav-contents-res{
+  position:absolute;
+  top: 0;
+  left:-35%;
+  transition : 1s;
+  width:35%;
+  height:100%;
+ 
+  background-color: #78081C;
+  display:flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 10%;
+  overflow-y: hidden;
+  
+}
  .nav-link{
+  display:flex;
+  justify-content: center;
+  align-items: center;
     text-decoration: none;
     color:white;
     font-size: large;
     font-family: 'Montaga', serif;
     
 
+ }
+ #logo{
+  width:150px;
+  height:auto;
  }
  .profile-icon{
    display: flex;
@@ -100,3 +125,12 @@ body,html{
    display: flex;
    gap:2%;
  }
+ @media screen and (max-width: 550px) {
+  .nav-link{
+   font-size: 90%;
+
+ }
+ .logo{
+  width:150px;
+}
+}

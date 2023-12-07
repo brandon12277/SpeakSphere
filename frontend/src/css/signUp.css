@@ -15,7 +15,7 @@ body,html{
     gap:12%;
  }
  .sign_up_cont{
-    width : 60vh;
+    width : 70vh;
     padding : 1%;
     border : none;
     border-left: #78081C 4px solid;
@@ -107,4 +107,30 @@ body,html{
 
   #error{
     font-family: 'Inter', sans-serif;
+  }
+
+
+  @media screen and (max-width: 650px) {
+    .sign_up_cont{
+      width : 50vh;
+      
+   }
+  }
+  @media screen and (max-width: 550px) {
+    .sign_up_cont{
+      width : 50vh;
+      
+   }
+  }
+  @media screen and (max-width: 450px) {
+    .sign_up_cont{
+      width : 50vh;
+      
+   }
+  }
+  @media screen and (min-height: 700px) {
+    .sign_up_cont{
+      width : 42vh;
+      
+   }
   }

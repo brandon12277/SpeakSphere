@@ -247,11 +247,11 @@ exports.findTrendingArticles = async (req,res) =>{
 exports.addArticles = async (req,res) =>{
 
     const img_file = req.file;
-    console.log(req.file)
+    
     const article_name = req.body.name
     const article_descp = req.body.description
-
-    const img_url = await file_url(img_file)
+    let img_url = ""
+    if(img_file){img_url = await file_url(img_file)}
     const new_article = {
       "firebaseUid" : req.body.firebaseUid,
       "username" : req.body.username,

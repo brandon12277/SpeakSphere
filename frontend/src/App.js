@@ -11,6 +11,7 @@ import { UserPostPage } from "./components/userPostPage";
 import { Article } from "./components/ArticleDisplay";
 import { ArticleCard } from "./components/ArticleCard";
 import Comment_Box from "./components/CommentBox";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         
        </Routes>
     </Router>
+    <Footer/>
     </div>
   );
 }

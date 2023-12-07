@@ -82,7 +82,7 @@ export function ArticleCard(props){
        if(!userid){
         document.querySelectorAll(".comment_bar")[0].value = "";
         document.getElementById("notice").innerHTML = "Please login to give an opinion and comment on the follow"
-        document.querySelectorAll(".blackscreen")[0].style.display = "flex";
+        document.querySelectorAll(".black")[0].style.display = "flex";
         document.querySelectorAll(".warning_notice")[0].style.display = "flex";
         return ;
       }
@@ -132,7 +132,7 @@ export function ArticleCard(props){
     else{
       document.querySelectorAll(".comment_bar")[0].value = "";
       document.getElementById("notice").innerHTML = "You cannot give a comment when you have not given an opinion."
-      document.querySelectorAll(".blackscreen")[0].style.display = "flex";
+      document.querySelectorAll(".black")[0].style.display = "flex";
       document.querySelectorAll(".warning_notice")[0].style.display = "flex";
     }
     
@@ -140,14 +140,14 @@ export function ArticleCard(props){
 
 
   function Goback(){
-      document.querySelectorAll(".blackscreen")[0].style.display = "none";
+      document.querySelectorAll(".black")[0].style.display = "none";
       document.querySelectorAll(".warning_notice")[0].style.display = "none";
   }
   async function handleVote(id,userid,vote){
     
     if(!userid){
       document.getElementById("notice").innerHTML = "Please login to give an opinion and comment on the follow"
-      document.querySelectorAll(".blackscreen")[0].style.display = "flex";
+      document.querySelectorAll(".black")[0].style.display = "flex";
       document.querySelectorAll(".warning_notice")[0].style.display = "flex";
       return ;
     }
@@ -222,7 +222,7 @@ export function ArticleCard(props){
 return(
   <div>
    
-    <div className="blackscreen">
+    <div className="black">
        <div className="warning_notice">
             <h3 id="notice"></h3>
             <div className="choice_buttons">
@@ -233,9 +233,15 @@ return(
     <div className="article_card">
         <p style={{fontFamily:"'Inter', sans-serif"}}><i style={{color:"red"}} class="fa-solid fa-eye"></i> {props.data.upvotes.length+props.data.downvotes.length+props.data.neutralvotes.length}</p>
         <p className="article_head">{props.data.article_name}</p>
-        <div className="article_img" style={{ backgroundImage: `url(${props.data.article_img})` }}>
+       
+        {
+           props.data.article_img?
+           <div className="article_img" style={{ backgroundImage: `url(${props.data.article_img})` }}> </div>
+            :
+          <div></div>
+        }
             
-        </div>
+       
         <div className="created_by">
           Created By  <span style={{fontWeight:"bold",color:"#78081C"}}>{props.data.username}</span>
           &nbsp; &nbsp; 
