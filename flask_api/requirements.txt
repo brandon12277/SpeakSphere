@@ -57,7 +57,7 @@ scipy==1.11.4
 six==1.16.0
 tensorboard==2.15.1
 tensorboard-data-server==0.7.2
-tensorflow-cpu @ https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow_cpu-2.15.0-cp311-cp311-win_amd64.whl#sha256=4487d0991e6f71bb56000f49a8ba467786b1ed7fafc7a6c0fad6d10ea46fc304
+tensorflow-cpu
 tensorflow-estimator==2.15.0
 tensorflow-intel==2.15.0
 tensorflow-io-gcs-filesystem==0.31.0

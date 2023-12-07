@@ -22,7 +22,7 @@ app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
 
 all_stopwords = stopwords.words('english')
-cnn = joblib.load('image_filter.h5')
+cnn = tf.keras.models.load_model('image_filter2.h5')
 
 @app.route('/image_filter',methods=['POST'])
 def filter():
