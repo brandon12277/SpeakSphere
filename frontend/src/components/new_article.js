@@ -106,8 +106,8 @@ export function NewArticle(){
          
         }
         const check_img = await axios.post('http://127.0.0.1:5000/image_filter',check_form_photo)
-        const check_name = await axios.post('http://127.0.0.1:5000/simple',check_form_name)
-        const check_descp = await axios.post('http://127.0.0.1:5000/simple',check_form)
+        const check_name = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form_name)
+        const check_descp = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form)
 
         let name = check_name.data.message
         let descp = check_descp.data.message

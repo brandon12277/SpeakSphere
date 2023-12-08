@@ -1,10 +1,10 @@
 numpy
-nltk
 urllib3
 Pillow
 flask
 gunicorn
-tensorflow
+tensorflow-cpu
+keras
 scikit-learn
 pandas
 joblib
