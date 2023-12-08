@@ -18,13 +18,8 @@ CORS(app, origins="*", supports_credentials=True)
 
 cnn = load_model('image_filter_2.h5')
 print("IN")
-
-
 @app.route('/image_filter',methods=['POST'])
 def filter():
-    if request.method == 'OPTIONS':
-        response = make_response()
-    else:
         image_url = request.json
         image_url = image_url.get('image')
        
@@ -62,11 +57,11 @@ def filter():
         else:
             response = jsonify({'class': 1})
 
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3001')
-    response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3001')
+        # response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        # response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
 
-    return response
+        return response
 
 
 

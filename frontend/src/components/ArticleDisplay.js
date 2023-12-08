@@ -31,11 +31,11 @@ export function Article(){
     try{
         console.log(id)
         if(userid){
-           let userCred = await axios.get('http://localhost:3000/db/FindUser?userid='+userid)
+           let userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
            setuser(userCred.data)
         }
         
-        let article = await axios.get('http://localhost:3000/db/FindArticle?id='+id)
+        let article = await axios.get('https://speakserver.onrender.com/db/FindArticle?id='+id)
        
        
        

@@ -29,7 +29,7 @@ export function UserHomePage(){
 
         if(id === "trending"){
             if(!trend){
-                const trendPosts = await axios.get('http://localhost:3000/db/FindTrending')
+                const trendPosts = await axios.get('https://speakserver.onrender.com/db/FindTrending')
                 console.log(trendPosts.data)
                 const list = trendPosts.data.map(article => (
                     <PostCard
@@ -58,7 +58,7 @@ export function UserHomePage(){
         }
         else if(id === "upvote"){
             if(!upvoted){
-                const upvotedPosts = await axios.get('http://localhost:3000/db/FindMostVotes')
+                const upvotedPosts = await axios.get('https://speakserver.onrender.com/db/FindMostVotes')
                 console.log(upvotedPosts.data)
                 const list = upvotedPosts.data.map(article => (
                     <PostCard
@@ -88,8 +88,8 @@ export function UserHomePage(){
 
  async function fetchData(){
     try{
-        let userCred = await axios.get('http://localhost:3000/db/FindUser?userid='+userid)
-        let newposts = await axios.get('http://localhost:3000/db/FindRandomPosts')
+        let userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
+        let newposts = await axios.get('https://speakserver.onrender.com/db/FindRandomPosts')
         console.log(newposts.data)
         
         const list = newposts.data.map(article => (

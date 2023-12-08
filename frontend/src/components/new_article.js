@@ -76,18 +76,15 @@ export function NewArticle(){
       .split(/\s+/)
       .filter(Boolean)
       .length
-      console.log(formData.description
-        .replace(/<[^>]*>/g, ' ') // Remove HTML tags
-        .split(/\s+/)
-        .filter(Boolean)
-        .length)
+
       if(formData.name == '' || formData.description == ''){
         if(formData.name == '')document.getElementById("name_warn").style.display = "flex";
         return;
       }
        document.querySelectorAll(".article_form")[0].style.display = "none";
-       document.querySelectorAll(".footer")[0].style.display = "none";
        document.querySelectorAll(".loading")[0].style.display = "flex";
+       document.querySelectorAll(".footer")[0].style.display = "none";
+       
         let form_data = formData
         let text = getPlainText(formData.description)
         console.log(text)
@@ -126,7 +123,7 @@ export function NewArticle(){
              document.querySelectorAll(".blackscreen_warning")[0].style.display = "block" 
              document.getElementById("ar_name").style.display = "block" 
             
-             document.getElementById("article_name").style.backgroundColor = "#fdeb37"
+            
              
         }
         if(descp.length>0){
@@ -134,9 +131,9 @@ export function NewArticle(){
           document.querySelectorAll(".blackscreen_warning")[0].style.display = "block" 
           document.getElementById("ar_descp").style.display = "block" 
           let descp_p = document.getElementById("descp_ml");
+          document.getElementById("descp_ml").innerHTML = "";
           let text = getPlainText(formData.description).split('.')
           let defined = formData.description.split('.')
-          let descp_text =document.createElement('p')
           let itr = 0;
           text.map((elem,idx)=>{
             let spanElem = document.createElement('span')
@@ -149,17 +146,20 @@ export function NewArticle(){
               defined[idx] = "<span style='background-color:#fdeb37'>"+defined[idx]+"</span>"
               descp_p.append(spanElem)
               itr++;
-              console.log("it entered")
+             
             }
             else{
               spanElem.style.backgroundColor = ""
               descp_p.append(spanElem)
               
             }
+
+           
             
           })
 
           let final_def = defined.join('.')
+          console.log(final_def)
           handleEditorChange(final_def)
 
 
@@ -169,7 +169,7 @@ export function NewArticle(){
          
 
      }
-     if(name.length>0 || descp.length>0 || class_label == 0 || class_label == 2)return;
+     if(name.length>0 || descp.length>0 || class_label == 0 ||  class_label ==2)return;
 
         let article = await axios.post('https://speakserver.onrender.com/db/addArticles',form_data,{
             headers: {

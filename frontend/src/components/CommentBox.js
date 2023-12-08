@@ -55,7 +55,7 @@ export default function Comment_Box(props){
            console.log("Hello")
           
           
-          let check_if_commentable = await axios.get("http://localhost:3000/db/CheckVotestatus?id="+id+"&userid="+userid)
+          let check_if_commentable = await axios.get("https://speakserver.onrender.com/db/CheckVotestatus?id="+id+"&userid="+userid)
          
           let choice = check_if_commentable.data === 1?"Support" : check_if_commentable.data === 2 ? "Against" : false;
     
@@ -70,7 +70,7 @@ export default function Comment_Box(props){
               "choice" : choice
             }
     
-          let add_comment = await axios.post("http://localhost:3000/db/AddReply",formdata)
+          let add_comment = await axios.post("https://speakserver.onrender.com/db/AddReply",formdata)
           
           if(add_comment.data){
 

@@ -28,7 +28,7 @@ export function LandingPage(){
 
         if(id == "trending"){
             if(!trend){
-                const trendPosts = await axios.get('http://localhost:3000/db/FindTrending')
+                const trendPosts = await axios.get('https://speakserver.onrender.com/db/FindTrending')
                 const list = trendPosts.data.map(article => (
                     <PostCard
                     id = {article._id}
@@ -56,7 +56,7 @@ export function LandingPage(){
         }
         else if(id == "upvote"){
             if(!upvoted){
-                const upvotedPosts = await axios.get('http://localhost:3000/db/FindMostVotes')
+                const upvotedPosts = await axios.get('https://speakserver.onrender.com/db/FindMostVotes')
                 const list = upvotedPosts.data.map(article => (
                     <PostCard
                     id = {article._id}
@@ -88,7 +88,7 @@ export function LandingPage(){
     localStorage.removeItem('url')
     TextTickingAnimation()
     try{
-        let newposts = await axios.get('http://localhost:3000/db/FindRandomPosts')
+        let newposts = await axios.get('https://speakserver.onrender.com/db/FindRandomPosts')
         
         const list = newposts.data.map(article => (
             <PostCard

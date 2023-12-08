@@ -5,8 +5,7 @@ import 'react-quill/dist/quill.snow.css'; // import the styles
 export default function RichTextEditor ({ editorContent, setEditorContent }){
   const [editorHtml, setEditorHtml] = useState(editorContent || '');
   
-    const handleEditorChange = (content, delta, source, editor) => {
-      // content is the HTML content of the editor
+    const handleEditorChange = (content) => {
       setEditorHtml(content)
       setEditorContent(content);
      
@@ -25,7 +24,7 @@ export default function RichTextEditor ({ editorContent, setEditorContent }){
       <ReactQuill
        style={{ height: '50%', marginBottom: '20px' }}
         theme="snow" // you can choose different themes
-        value={editorHtml}
+        value = {editorHtml}
         onChange={handleEditorChange}
       />
        <div>

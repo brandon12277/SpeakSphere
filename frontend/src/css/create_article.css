@@ -221,9 +221,11 @@ p{
     }
   }
   .loading{
+    height:100vh;
     display:none;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     font-family: 'Montaga', serif;
     font-size: large;
   }
