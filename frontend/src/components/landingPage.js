@@ -84,12 +84,13 @@ export function LandingPage(){
     }
 
  async function fetchData(){
+    document.querySelectorAll(".footer")[0].style.display = "none"
     document.getElementById("root").style.overflowY = "auto"
     localStorage.removeItem('url')
     TextTickingAnimation()
     try{
         let newposts = await axios.get('https://speakserver.onrender.com/db/FindRandomPosts')
-        
+        document.querySelectorAll(".footer")[0].style.display = "flex"
         const list = newposts.data.map(article => (
             <PostCard
             id = {article._id}
@@ -104,9 +105,10 @@ export function LandingPage(){
            
           
         ))
-
+        
         setRandom(list)
         setPosts(list)
+
  
      }
      catch(err){
@@ -151,6 +153,7 @@ export function LandingPage(){
              <div className="post_landing_page">
               {
                 !posts?
+                
                 <div>
                      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>

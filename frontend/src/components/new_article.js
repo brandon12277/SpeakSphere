@@ -76,7 +76,7 @@ export function NewArticle(){
       .split(/\s+/)
       .filter(Boolean)
       .length
-
+      if(len<100)return;
       if(formData.name == '' || formData.description == ''){
         if(formData.name == '')document.getElementById("name_warn").style.display = "flex";
         return;
@@ -104,13 +104,13 @@ export function NewArticle(){
         if(formData.image == ""){
          
         }
-        const check_img = await axios.post('http://127.0.0.1:5000/image_filter',check_form_photo)
+        // const check_img = await axios.post('https://speak-flask-img-api.onrender.com/image_filter',check_form_photo)
         const check_name = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form_name)
         const check_descp = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form)
 
         let name = check_name.data.message
         let descp = check_descp.data.message
-        let class_label = check_img.data.class
+        let class_label = 1
         console.log(descp)
         console.log(class_label)
         if(class_label == 0 ||  class_label ==2){

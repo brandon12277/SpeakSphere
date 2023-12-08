@@ -128,8 +128,12 @@ export function SignUpPage(){
         document.querySelectorAll(".signup")[0].style.display = ""; 
     document.querySelectorAll(".onload")[0].style.display = "none";  
         console.log(err)
-        if(err.response)
-        document.getElementById("error").innerHTML =err.response.data
+        if(err.response || err){
+          if(err.response)document.getElementById("error").innerHTML =err.response.data
+          else
+          document.getElementById("error").innerHTML =err
+        }
+        
         else
         document.getElementById("error").innerHTML = "The email address is already in use by another account."
 

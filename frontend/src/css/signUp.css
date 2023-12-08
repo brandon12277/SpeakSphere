@@ -17,6 +17,7 @@ body,html{
  .sign_up_cont{
     width : 70vh;
     padding : 1%;
+    margin-bottom: 2%;
     border : none;
     border-left: #78081C 4px solid;
     border-right: #78081C 4px solid;
