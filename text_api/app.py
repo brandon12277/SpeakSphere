@@ -53,7 +53,7 @@ def simple():
                 lines.append(i)
         response = jsonify({'message': lines})
 
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3001')
+    response.headers.add('Access-Control-Allow-Origin', 'https://speaksphere.onrender.com/')
     response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
 
