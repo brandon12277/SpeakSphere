@@ -1,10 +1,6 @@
 numpy
 nltk
-urllib3
-Pillow
 flask
-gunicorn
-tensorflow
 scikit-learn
 pandas
 joblib

@@ -24,6 +24,7 @@ with open("english_stopwords.txt", 'r') as file:
 
 cnn = load_model('image_filter_2.h5')
 model_tree = joblib.load('text_filter_svc.h5')
+vectorizer_text = joblib.load('vectorizer.joblib')
 
 @app.route('/image_filter',methods=['POST'])
 def filter():
@@ -89,7 +90,7 @@ def simple():
         text = text.get('description')
         text_data= []
         
-        vectorizer_text = joblib.load('vectorizer.joblib')
+        
         text_array = text.split('.')    
         length = len(text_array)
         for text in text_array:
