@@ -57,9 +57,9 @@ def filter():
         else:
             response = jsonify({'class': 1})
 
-        # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3001')
-        # response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
-        # response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Origin', 'https://speaksphere.onrender.com/')
+        response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
 
         return response
 
