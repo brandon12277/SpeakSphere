@@ -16,8 +16,8 @@ export function UserPostPage(){
 
  async function fetchData(){
     try{
-        let userCred = await axios.get('http://localhost:3000/db/FindUser?userid='+userid)
-        let article_pulled = await axios.get('http://localhost:3000/db/PullArticles?userid='+userid)
+        let userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
+        let article_pulled = await axios.get('https://speakserver.onrender.com/db/PullArticles?userid='+userid)
         console.log(article_pulled.data)
         
         const list = article_pulled.data.map(article => (

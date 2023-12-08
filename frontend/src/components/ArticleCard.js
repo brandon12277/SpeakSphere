@@ -57,7 +57,7 @@ export function ArticleCard(props){
         "category"  : "neutralvotes"
       }
 
-      let give_neutral_vote = await axios.post("http://localhost:3000/db/handlevote",formdata)
+      let give_neutral_vote = await axios.post("https://speakserver.onrender.com/db/handlevote",formdata)
 
   
       
@@ -92,7 +92,7 @@ export function ArticleCard(props){
       
       
       
-      let check_if_commentable = await axios.get("http://localhost:3000/db/CheckVotestatus?id="+id+"&userid="+userid)
+      let check_if_commentable = await axios.get("https://speakserver.onrender.com/db/CheckVotestatus?id="+id+"&userid="+userid)
      
       let choice = check_if_commentable.data === 1?"Support" : check_if_commentable.data === 2 ? "Against" : false;
 
@@ -106,7 +106,7 @@ export function ArticleCard(props){
           "choice" : choice
         }
 
-      let add_comment = await axios.post("http://localhost:3000/db/AddComment",formdata)
+      let add_comment = await axios.post("https://speakserver.onrender.com/db/AddComment",formdata)
 
       console.log(add_comment.data)
 
@@ -172,7 +172,7 @@ export function ArticleCard(props){
         
 
 
-         let update_of_vote = await axios.post("http://localhost:3000/db/handlevote",formdata)
+         let update_of_vote = await axios.post("https://speakserver.onrender.com/db/handlevote",formdata)
           console.log(update_of_vote)
          if(update_of_vote.data === 1)console.log("Upvoted")
   

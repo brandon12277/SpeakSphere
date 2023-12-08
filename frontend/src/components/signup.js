@@ -95,7 +95,7 @@ export function SignUpPage(){
        
       document.querySelectorAll(".signup")[0].style.display = "none"; 
     document.querySelectorAll(".onload")[0].style.display = "block"; 
-      axios.post('http://localhost:3000/db/ValidateNewUser',formData)
+      axios.post('https://speakserver.onrender.com/db/ValidateNewUser',formData)
       .then(async (res)=>{
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password);
         const user = userCredential.user;
@@ -108,7 +108,7 @@ export function SignUpPage(){
           phone : formData.phone,
           firebaseUid  : user.uid
         }
-        axios.post('http://localhost:3000/db/createUser', form_data)
+        axios.post('https://speakserver.onrender.com/db/createUser', form_data)
         .then((response)=>{
           console.log(response.data)
           localStorage.setItem('token', user.uid);
@@ -171,7 +171,7 @@ export function SignUpPage(){
         console.log(form_data)
        
         
-        axios.post('http://localhost:3000/db/createUser', form_data)
+        axios.post('https://speakserver.onrender.com/db/createUser', form_data)
         .then((res)=>{
           localStorage.setItem('token', user.uid);
           localStorage.setItem('isauth', true);

@@ -32,7 +32,7 @@ export function NewArticle(){
 
  async function fetchData(){
     try{
-        let userCred = await axios.get('http://localhost:3000/db/FindUser?userid='+userid)
+        let userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
         setuser(userCred.data)
  
      }
@@ -70,6 +70,7 @@ export function NewArticle(){
 
   const handleSubmit = async () =>{
     try{
+
       let len = formData.description
       .replace(/<[^>]*>/g, ' ') // Remove HTML tags
       .split(/\s+/)
@@ -85,6 +86,7 @@ export function NewArticle(){
         return;
       }
        document.querySelectorAll(".article_form")[0].style.display = "none";
+       document.querySelectorAll(".footer")[0].style.display = "none";
        document.querySelectorAll(".loading")[0].style.display = "flex";
         let form_data = formData
         let text = getPlainText(formData.description)
@@ -105,7 +107,7 @@ export function NewArticle(){
         if(formData.image == ""){
          
         }
-        const check_img = await axios.post('http://127.0.0.1:5000/image_filter',check_form_photo)
+        const check_img = await axios.post('https://speak-flask-img-api.onrender.com/image_filter',check_form_photo)
         const check_name = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form_name)
         const check_descp = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form)
 
@@ -169,7 +171,7 @@ export function NewArticle(){
      }
      if(name.length>0 || descp.length>0 || class_label == 0 || class_label == 2)return;
 
-        let article = await axios.post('http://localhost:3000/db/addArticles',form_data,{
+        let article = await axios.post('https://speakserver.onrender.com/db/addArticles',form_data,{
             headers: {
               'Content-Type': 'multipart/form-data',
             },
@@ -253,6 +255,7 @@ return (
           document.querySelectorAll("#ar_name")[0].style.display="none"
           document.querySelectorAll("#ar_descp")[0].style.display="none"
           document.querySelectorAll(".article_form")[0].style.display = "flex";
+          document.querySelectorAll(".footer")[0].style.display = "flex";
           
         }} className="make_change">Make Changes</button>
      </div>
