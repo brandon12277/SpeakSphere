@@ -9,7 +9,7 @@ from nltk.stem.porter import PorterStemmer
 import sklearn
 
 app = Flask(__name__)
-CORS(app, origins="*", supports_credentials=True)
+CORS(app)
 all_stopwords = ""
 with open("english_stopwords.txt", 'r') as file:
     all_stopwords = set(file.read().splitlines())
@@ -53,7 +53,7 @@ def simple():
                 lines.append(i)
         response = jsonify({'message': lines})
 
-    response.headers.add('Access-Control-Allow-Origin', 'https://speaksphere.onrender.com/')
+    response.headers.add('Access-Control-Allow-Origin', 'https://speaksphere.onrender.com')
     response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
 
