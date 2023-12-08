@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+
 const userSchema = new mongoose.Schema({
     firebaseUid : {
        type : String,
@@ -12,8 +13,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required : [true],
         unique  :true,
-        sparse: true,
-        default: null,
     },
     password : {
         type: String,
@@ -22,17 +21,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required : [true],
         unique  :true,
-        sparse: true,
-        default: null,
     },
-    phone : {
-        type: String,
-        unique  :true,
-        sparse: true,
-        default: null,
+    phoneg : {
+       type: String,
+       unique  :true,
+       sparse : true,
     }
 
 });
-
+userSchema.index({ phoneg: 1 }, { unique: true, partialFilterExpression: { phoneg: { $exists: true } } });
 const Users = mongoose.model('Users',userSchema)
 module.exports = Users

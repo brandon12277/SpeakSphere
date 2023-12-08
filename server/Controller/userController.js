@@ -1,7 +1,9 @@
 const User  = require("./../models/user")
+const mongoose = require("mongoose")
 
 exports.createUser = async (req,res) => {
    try{
+    
     const user = await User.create(req.body)
     console.log(user)
     res.status(200).json(user)
@@ -60,7 +62,7 @@ exports.validateUserCredentials = async (req,res) =>{
 }
 
 exports.validateNewUser = async (req,res) => {
- 
+   
     const users = await User.find({
         $or: [
           { username: req.body.username },
@@ -70,8 +72,9 @@ exports.validateNewUser = async (req,res) => {
       });
   
      
-
+      
       if(users.length){
+        console.log(users[0].phone)
         if(users[0].username == req.body.username)
         return res.status(400).json(
            "Username already exists"
@@ -82,7 +85,7 @@ exports.validateNewUser = async (req,res) => {
             "This email is already registered"
         )
 
-        if(users[0].phone == req.body.phone)
+        if(users[0].phone == req.body.phone && (users[0].phone!=null || users[0].phone!=""))
         return res.status(400).json(
             "This mobile number is already registered"
         )

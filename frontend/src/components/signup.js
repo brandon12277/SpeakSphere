@@ -105,7 +105,7 @@ export function SignUpPage(){
           name : formData.name,
           email : formData.email,
           password : formData.password,
-          phone : formData.phone,
+          phoneg : formData.phone,
           firebaseUid  : user.uid
         }
         axios.post('https://speakserver.onrender.com/db/createUser', form_data)
@@ -175,7 +175,7 @@ export function SignUpPage(){
         console.log(form_data)
        
         
-        axios.post('https://speakserver.onrender.com/db/createUser', form_data)
+        axios.post('http://localhost:3000/db/createUser', form_data)
         .then((res)=>{
           localStorage.setItem('token', user.uid);
           localStorage.setItem('isauth', true);
