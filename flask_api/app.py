@@ -6,9 +6,9 @@ from urllib import request as req
 import sklearn
 from PIL import Image
 from io import BytesIO
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.inception_v3 import preprocess_input, decode_predictions
+from keras.models import load_model
+from keras.preprocessing import image
+from keras.applications.inception_v3 import preprocess_input, decode_predictions
 import base64
 import os
 
@@ -17,6 +17,8 @@ CORS(app, origins="*", supports_credentials=True)
 
 
 cnn = load_model('image_filter_2.h5')
+print("IN")
+
 
 @app.route('/image_filter',methods=['POST'])
 def filter():
@@ -37,19 +39,13 @@ def filter():
        
             print("IN")
             image_bytes = base64.b64decode(image_url.split(",")[1])
-
             image_pil = Image.open(BytesIO(image_bytes))
-
-            # Resize the image to (64, 64)
-            #image_pil_resized = image_pil.resize((64, 64))
             image_pil_resized = image.load_img(BytesIO(image_bytes), target_size = (64, 64))
-            # Convert the resized PIL Image to a NumPy array
+           
             image_np_resized = image.img_to_array(image_pil_resized)
             print("IN")
-            # Expand the dimensions to match the input shape of your model
+          
             resized_img_array = np.expand_dims(image_np_resized, axis=0)
-
-            # Preproces s the resized input image
             print("IN")
             result = cnn.predict(resized_img_array)
             print("OUT")

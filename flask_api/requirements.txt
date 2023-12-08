@@ -3,7 +3,7 @@ urllib3
 Pillow
 flask
 gunicorn
-tensorflow
+tensorflow-cpu
 scikit-learn
 pandas
 joblib
