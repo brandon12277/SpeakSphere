@@ -93,15 +93,15 @@ export function UserNav(props){
 
 
    
-   <a className="nav-link" href="/Account">Home</a>
-       <a className="nav-link" href="/Account/my-posts">My Posts</a>
+   <a className="nav-link" href="/">Home</a>
+       <a className="nav-link" href="/my-posts">My Posts</a>
        
      
        
       
 
 
-<a className="nav-link" href="/Account/NewArticle">New Post</a>
+<a className="nav-link" href="/NewArticle">New Post</a>
 <button className="dropdown-link" onClick={handleLogout}>Log out</button>
 
 </div> 
