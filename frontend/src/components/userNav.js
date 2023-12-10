@@ -12,8 +12,11 @@ export function UserNav(props){
         localStorage.removeItem('token')
         if(url)
         window.location.reload()
-        else
-        navigate("/")
+        else{
+          navigate("/")
+          window.location.reload()
+        }
+        
 
         localStorage.removeItem('url')
        
@@ -44,8 +47,8 @@ export function UserNav(props){
   <div className = "navbar">
   <img style={{width:"200px",height:"auto"}}src={logo}></img>
    <div className='nav-contents'>
-   <a className="nav-link" href="/Account">Home</a>
-       <a className="nav-link" href="/Account/my-posts">My Posts</a>
+   <a className="nav-link" href="/">Home</a>
+       <a className="nav-link" href="/my-posts">My Posts</a>
        
        <div className="profile-icon">
        <a className="nav-link" href="">{props.user.username} </a>
@@ -54,7 +57,7 @@ export function UserNav(props){
 <i class="fa fa-caret-down"></i>
 </button>
 <div class="dropdown-content">
-<a className="dropdown-link" href="/Account/NewArticle">New Post</a>
+<a className="dropdown-link" href="/NewArticle">New Post</a>
 <button className="dropdown-link" onClick={handleLogout}>Log out</button>
 
 </div>

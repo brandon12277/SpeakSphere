@@ -113,7 +113,7 @@ export function SignUpPage(){
           console.log(response.data)
           localStorage.setItem('token', user.uid);
             localStorage.setItem('isauth', true);
-          navigate("/Account")
+          navigate("/")
         })
         .catch(err=>{
           console.log(err)
@@ -179,12 +179,12 @@ export function SignUpPage(){
         .then((res)=>{
           localStorage.setItem('token', user.uid);
           localStorage.setItem('isauth', true);
-        navigate("/Account")
+        navigate("/")
         })
         .catch(err=>{
           localStorage.setItem('token', user.uid);
         localStorage.setItem('isauth', true);
-          navigate("/Account")
+          navigate("/")
         })
         
          

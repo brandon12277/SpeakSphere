@@ -45,7 +45,7 @@ export default function Comment_Box(props){
             console.log(userid)
             document.querySelectorAll("#"+reply_div)[0].value = "";
             document.getElementById("notice").innerHTML = "Please login to give an opinion and comment on the follow"
-            document.querySelectorAll(".blackscreen")[0].style.display = "flex";
+            document.querySelectorAll(".black")[0].style.display = "flex";
             document.querySelectorAll(".warning_notice")[0].style.display = "flex";
             return ;
           }
@@ -92,8 +92,8 @@ export default function Comment_Box(props){
         else{
           document.querySelectorAll("#"+reply_div)[0].value = "";
           document.getElementById("notice").innerHTML = "You cannot give a comment when you have not given an opinion."
-          document.querySelectorAll(".blackscreen")[0].style.display = "flex";
-          document.querySelectorAll(".warning_notice")[0].style.display = "flex";
+      document.querySelectorAll(".black")[0].style.display = "flex";
+      document.querySelectorAll(".warning_notice")[0].style.display = "flex";
         }
         
       }

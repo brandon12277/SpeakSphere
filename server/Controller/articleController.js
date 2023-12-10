@@ -244,6 +244,21 @@ exports.findTrendingArticles = async (req,res) =>{
 
 
 }
+
+
+exports.DeletePost = async (req,res) =>{
+  console.log(req.body)
+  const article = await Articles.deleteOne(req.body)
+ 
+  console.log(article)
+  if(article){
+    res.status(200).json(true)
+  }
+  else
+  {
+    res.status(400).json()
+  }
+}
 exports.addArticles = async (req,res) =>{
 
     const img_file = req.file;

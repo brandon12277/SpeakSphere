@@ -12,7 +12,7 @@ export function UserHomePage(){
     const userid = localStorage.getItem('token')
     const isauth = localStorage.getItem('isauth')
     const navigate = useNavigate();
-   console.log(isauth)
+    console.log(isauth)
     const [user,setuser] = useState("");
     const [posts,setPosts] = useState(null);
     const [random,setRandom] = useState(null);
@@ -117,9 +117,6 @@ export function UserHomePage(){
      }
  }
  useEffect(()=>{
-    if(!isauth){
-        navigate("/Login")
-     }
       fetchData()
     
 
@@ -133,7 +130,7 @@ useEffect(()=>{
 
 },[posts]);
 
-if(!user){
+if(!user && userid){
     return(
         <div className="loading_page">
               <div class="lds-ring"><div></div><div></div><div></div><div></div></div>

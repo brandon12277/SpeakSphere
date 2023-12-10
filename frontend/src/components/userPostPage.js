@@ -18,7 +18,6 @@ export function UserPostPage(){
     try{
         let userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
         let article_pulled = await axios.get('https://speakserver.onrender.com/db/PullArticles?userid='+userid)
-        console.log(article_pulled.data)
         
         const list = article_pulled.data.map(article => (
                 <PostCard
@@ -29,7 +28,7 @@ export function UserPostPage(){
                 name= {article.username}
                 upvotes = {article.upvotes.length}
                 downvotes = {article.downvotes.length}
-                
+                delete = {true}
                 />
                
               

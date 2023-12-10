@@ -15,6 +15,7 @@ import Comment_Box from './CommentBox';
 
 export function ArticleCard(props){
   let stats = [];
+  const [changestat,setChange] = useState([])
   const [child_comment,setChild] = useState([])
   const [comment,setComment] = useState("")
   const [comments_bar,setDisplayComments] = useState("")
@@ -28,8 +29,7 @@ export function ArticleCard(props){
      
   },[comments_bar])
   useEffect(()=>{
-
-    
+   
       
      let comments = props.data.comments.map((comment) =>(
 
@@ -58,7 +58,7 @@ export function ArticleCard(props){
       }
 
       let give_neutral_vote = await axios.post("https://speakserver.onrender.com/db/handlevote",formdata)
-
+      setChange([])
   
       
 
@@ -138,7 +138,18 @@ export function ArticleCard(props){
     
   }
 
-
+ function setStats(x){
+  stats = {
+    labels: ['Upvotes', 'Downvotes', 'Neutral','Changed'],
+    datasets: [
+      {
+        label: 'Opinion Analysis',
+        backgroundColor: ['rgb(222, 48, 48)', 'grey', 'pink','lightgreen'], // Set colors for each segment
+        data: [props.data.upvotes.length+x,props.data.downvotes.length,props.data.neutralvotes.length,props.data.changedvotes.length], // Your data here
+      },
+    ],
+  }
+ }
   function Goback(){
       document.querySelectorAll(".black")[0].style.display = "none";
       document.querySelectorAll(".warning_notice")[0].style.display = "none";
@@ -159,7 +170,7 @@ export function ArticleCard(props){
             "firebaseUid" : userid,
             "category"  : vote
           }
-          console.log(formdata)
+          
           if(vote === "upvotes"){
             document.querySelectorAll(".upvote_butt")[0].classList.add("upvote_butt_focus")
             document.querySelectorAll(".against_butt")[0].classList.remove("against_butt_focus")
@@ -174,17 +185,16 @@ export function ArticleCard(props){
 
          let update_of_vote = await axios.post("https://speakserver.onrender.com/db/handlevote",formdata)
           console.log(update_of_vote)
-         if(update_of_vote.data === 1)console.log("Upvoted")
+          setChange([])
+         
   
    
    
   
   
   }
-
-
-   const article = props.data
-   if(article.upvotes.length == 0 && article.downvotes.length == 0 && article.neutralvotes.length == 0 && article.downvotes.length == 0){
+  const article = props.data
+  if(article.upvotes.length == 0 && article.downvotes.length == 0 && article.neutralvotes.length == 0 && article.downvotes.length == 0){
     stats = {
       labels: ['No Votes'],
       datasets: [
@@ -197,17 +207,11 @@ export function ArticleCard(props){
     }
    }
    else{
-    stats = {
-      labels: ['Upvotes', 'Downvotes', 'Neutral','Changed'],
-      datasets: [
-        {
-          label: 'Opinion Analysis',
-          backgroundColor: ['rgb(222, 48, 48)', 'grey', 'pink','lightgreen'], // Set colors for each segment
-          data: [props.data.upvotes.length,props.data.downvotes.length,props.data.neutralvotes.length,props.data.changedvotes.length], // Your data here
-        },
-      ],
-    }
+    setStats(0)
   }
+
+  
+   
 
   const handleSubmitButton = () =>{
      document.querySelectorAll(".button_div_comments")[0].style.display = "flex";

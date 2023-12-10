@@ -1,6 +1,6 @@
 
-
  .card_body{
+  z-index: 0;
   width:70%;
   height:30%;
   padding:2%;
@@ -68,7 +68,20 @@
    gap:1%;
    width:100%;
  }
-
+ .delete,.delete_post,.no{
+  background-color: #78081C ;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right:2%;
+  color: white;
+  padding: 3%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.no{
+  background-color:lightgreen;
+}
  @media screen and (max-width: 900px) {
   .card_body{
     width:80%;
@@ -86,4 +99,24 @@
     width:auto;
     height:200px;
   }
+}
+
+.block{
+  padding:2%;
+  background-color: white;
+  border-radius: 0.45em;
+  box-shadow: #1c1c1c 0px 0px 5px;
+}
+
+#black{
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
+  display: none;
 }

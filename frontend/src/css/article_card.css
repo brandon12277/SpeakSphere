@@ -162,7 +162,7 @@
     font-family: 'Inter', sans-serif;
 }
 
-.blackscreen,.black{
+.blackscreen,.black,#black{
     align-items: center;
     justify-content: center;
     position: fixed;

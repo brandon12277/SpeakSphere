@@ -32,18 +32,17 @@ def filter():
             
 
        
-            print("IN")
+           
             image_bytes = base64.b64decode(image_url.split(",")[1])
             image_pil = Image.open(BytesIO(image_bytes))
+
+            
             image_pil_resized = image.load_img(BytesIO(image_bytes), target_size = (64, 64))
-           
             image_np_resized = image.img_to_array(image_pil_resized)
-            print("IN")
-          
             resized_img_array = np.expand_dims(image_np_resized, axis=0)
-            print("IN")
+           
             result = cnn.predict(resized_img_array)
-            print("OUT")
+            
             class_label = -1
 
             if result[0][0] == 1:

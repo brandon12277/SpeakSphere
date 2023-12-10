@@ -59,7 +59,7 @@ export function Login(){
       document.querySelectorAll(".signup")[0].style.display = ""; 
       document.querySelectorAll(".onload")[0].style.display = "none"; 
       if(!url)
-      navigate("/Account")
+      navigate("/")
     else
     navigate(url)
    
@@ -111,7 +111,7 @@ export function Login(){
           localStorage.setItem('token', user.uid);
           localStorage.setItem('isauth', true);
            if(!url)
-      navigate("/Account")
+      navigate("/")
     else
     navigate(url)
         })
@@ -119,7 +119,7 @@ export function Login(){
           localStorage.setItem('token', user.uid);
         localStorage.setItem('isauth', true);
              if(!url)
-           navigate("/Account")
+           navigate("/")
           else
           navigate(url)
         })

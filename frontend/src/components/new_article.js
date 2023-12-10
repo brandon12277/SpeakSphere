@@ -177,7 +177,7 @@ export function NewArticle(){
             },
         })
         if(article.data){
-            navigate("/Account")
+            navigate("/")
         }
     }
     catch(e){

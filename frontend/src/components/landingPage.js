@@ -2,8 +2,11 @@ import {React,useEffect,useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import { Navbar } from './navbar';
 import "../css/landing.css"
+
 import axios from "axios"
 import { PostCard } from './postCard';
+import { UserNav } from './userNav';
+import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 
 
@@ -13,6 +16,11 @@ import Footer from './Footer';
 
 
 export function LandingPage(){
+    const userid = localStorage.getItem('token')
+    const isauth = localStorage.getItem('isauth')
+    const navigate = useNavigate();
+    console.log(userid,isauth)
+    const [user,setuser] = useState("");
     const [posts,setPosts] = useState(null);
     const [random,setRandom] = useState(null);
     const [trend,setTrend] = useState(null);
@@ -84,11 +92,17 @@ export function LandingPage(){
     }
 
  async function fetchData(){
+
     document.querySelectorAll(".footer")[0].style.display = "none"
     document.getElementById("root").style.overflowY = "auto"
     localStorage.removeItem('url')
     TextTickingAnimation()
     try{
+        let userCred = null
+        if(userid!=null){
+            userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
+        }
+        
         let newposts = await axios.get('https://speakserver.onrender.com/db/FindRandomPosts')
         document.querySelectorAll(".footer")[0].style.display = "flex"
         const list = newposts.data.map(article => (
@@ -105,7 +119,7 @@ export function LandingPage(){
            
           
         ))
-        
+        if(userCred)setuser(userCred.data)
         setRandom(list)
         setPosts(list)
 
@@ -126,7 +140,7 @@ export function LandingPage(){
         let animation = setInterval(()=>{
            
             if(itr+1 == text.length)clearInterval(animation)
-             if(itr>0 && text[itr-1] !== '<')
+             if(quote && itr>0 && text[itr-1] !== '<')
              quote.innerHTML=text.substring(0, itr++);
             else
             itr++;
@@ -135,35 +149,82 @@ export function LandingPage(){
         },100)
     }
     
-    useEffect(fetchData,[])
-     return (
-        <div className = "cont">
-             <Navbar/>
-             <div  style={{zIndex:"0"}}className="top-component">
-                 <h3 style={{zIndex:"0"}} className= "quote"></h3>
-                 <button className="SignUp"><a className="nav-link" href="/Register">Sign Up For Free</a></button>
-             </div>
-             <div className="bottom-component">
-              <div className="bottom-nav">
-                 <button style={{borderBottom:"3px solid #ec1940"}} onClick={handleClick} id="post" className="bottom-nav-link"><i onClick={handleClick} id="post" class="fa-solid fa-globe"></i> Posts</button>
-                 <button onClick={handleClick} id="trending" className="bottom-nav-link"><i onClick={handleClick} id="trending" class="fa-solid fa-arrow-trend-up"></i > Trending</button>
-                 <button  onClick={handleClick} id="upvote" className="bottom-nav-link"><i onClick={handleClick} id="upvote" class="fa-solid fa-arrow-up-short-wide"></i> Most Upvoted</button>
-              </div>
-             </div>
-             <div className="post_landing_page">
-              {
-                !posts?
-                
-                <div>
-                     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                </div>
-                :
-                <div className="list_landing_page">{posts}</div>
-              }
-             
+    useEffect(()=>{
+        fetchData()
+        return () => {}
+    },[])
+    if(!isauth){
+        return (
+            <div className = "cont">
+                 <Navbar/>
+                 <div  style={{zIndex:"0"}}className="top-component">
+                     <h3 style={{zIndex:"0"}} className= "quote"></h3>
+                     <button className="SignUp"><a className="nav-link" href="/Register">Sign Up For Free</a></button>
+                 </div>
+                 <div className="bottom-component">
+                  <div className="bottom-nav">
+                     <button style={{borderBottom:"3px solid #ec1940"}} onClick={handleClick} id="post" className="bottom-nav-link"><i onClick={handleClick} id="post" class="fa-solid fa-globe"></i> Posts</button>
+                     <button onClick={handleClick} id="trending" className="bottom-nav-link"><i onClick={handleClick} id="trending" class="fa-solid fa-arrow-trend-up"></i > Trending</button>
+                     <button  onClick={handleClick} id="upvote" className="bottom-nav-link"><i onClick={handleClick} id="upvote" class="fa-solid fa-arrow-up-short-wide"></i> Most Upvoted</button>
+                  </div>
+                 </div>
+                 <div className="post_landing_page">
+                  {
+                    !posts?
+                    
+                    <div className="">
+                         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </div>
+                    :
+                    <div className="list_landing_page">{posts}</div>
+                  }
+                 
+                  
+               </div>
               
-           </div>
-          
+            </div>
+         )
+    }
+   else{
+
+    if(!user && userid){
+        return(
+            <div className="loading_page">
+                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>
+        )
+    }
+    return (
+    
+        <div className="cont">
+          <UserNav
+             user = {user}
+          />
+           <div className="bottom-component">
+            
+                  <div className="bottom-nav">
+                     <button style={{borderBottom:"3px solid #ec1940"}} onClick={handleClick} id="post" className="bottom-nav-link"><i class="fa-solid fa-globe"></i> Posts</button>
+                     <button onClick={handleClick} id="trending" className="bottom-nav-link"><i class="fa-solid fa-arrow-trend-up"></i> Trending</button>
+                     <button  onClick={handleClick} id="upvote" className="bottom-nav-link"><i class="fa-solid fa-arrow-up-short-wide"></i> Most Upvoted</button>
+                  </div>
+                
+    
         </div>
-     )
+        <div className="posts">
+                  {
+                    !posts?
+                    <div>
+                         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </div>
+                    :
+                    <div className="list">{posts}</div>
+                  }
+                 
+                  
+               </div>
+       
+        </div>
+    )
+}
+     
 }

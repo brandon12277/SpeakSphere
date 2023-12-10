@@ -10,11 +10,12 @@ import no_profile from "../static/no-profile.png"
 
 export function PostCard(props){
     const navigate = new useNavigate()
-    
+    const [divclick,setClick] = useState(true)
+    const delete_class = "black_"+props.id
     const [isMobile, setIsMobile] = useState(false);
     const handleClick = () =>{
      
-           window.location.href=`/${props.article_name}/${props.id}`
+           window.location.href=`/${encodeURIComponent(props.article_name)}/${encodeURIComponent(props.id)}`
       }
       const getPlainText = (html) => {
         // Create a temporary element to parse the HTML content
@@ -36,12 +37,45 @@ export function PostCard(props){
           window.removeEventListener('resize', handleResize);
         };
       }, []);
-          
+
+      function handleBlack(event){
+        document.querySelectorAll("."+delete_class)[0].style.display = "flex";
+        setClick(false)
+        event.stopPropagation()
+        
+       }
+      async function handleDelete(){
+        const form_data = {
+          "_id" : props.id
+        }
+         const delete_post = await axios.post("http://localhost:3000/db/DeletePost",form_data)
+         if(delete_post.data)window.location.reload()
+         
+      }
     return(
        
 
        
-           <div className="card_body" onClick={handleClick}>
+
+      
+           <div className="card_body" onClick={
+            ()=>{
+                if(divclick)
+                  {handleClick()}
+            }
+            }>
+             <div id="black" className={delete_class}>
+                   <div className="block">
+                       <p>Are you sure you want to delete this post?</p>
+                       <div style={{width:"100%",gap:"5%"}}><button id={delete_class} onClick={handleDelete} className="delete_post">Yes</button><button onClick={
+                        ()=>{
+                          document.querySelectorAll("."+delete_class)[0].style.display = "none";
+                          setClick(true)
+                        }
+                       } className="no">No</button></div>
+                   </div>
+             </div>
+            {props.delete? <div> <button style={{zIndex:"3"}} onClick={handleBlack}  className="delete"><i class="fa-solid fa-trash"></i></button> </div> : <div></div>}
             <div className="context">
 
            
@@ -51,7 +85,7 @@ export function PostCard(props){
                  
                  
                  </p>
-                 <a href={`/${props.article_name}/${props.id}`}>Learn More</a>
+                 <a href={`/${encodeURIComponent(props.article_name)}/${encodeURIComponent(props.id)}`}>Learn More</a>
               </div>
               {
                 props.image?
@@ -90,6 +124,7 @@ export function PostCard(props){
                 
               </div>
            </div>
+         
 
 
       

@@ -21,11 +21,9 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/Register" element={<SignUpPage />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Account" element={<UserHomePage />} />
-        <Route path="/Account/NewArticle" element={<NewArticle/>} />
-        <Route path="/Account/my-posts" element={<UserPostPage/>} />
+        <Route path="/NewArticle" element={<NewArticle/>} />
+        <Route path="/my-posts" element={<UserPostPage/>} />
         <Route path="/:article/:id" element={<Article/>} />
-        <Route path="/test" element={<Comment_Box/>} />
         
        </Routes>
     </Router>

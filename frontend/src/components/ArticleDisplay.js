@@ -19,7 +19,9 @@ export function Article(){
     const location = useLocation();
     localStorage.setItem('url',location.pathname)
     const navigate = useNavigate();
-    const { article, id } = useParams();
+    let{ article, id } = useParams();
+    article = decodeURIComponent(article)
+    id = decodeURIComponent(id)
    console.log(isauth)
     const [user,setuser] = useState("");
     const [post,setPost] = useState(null);
