@@ -48,7 +48,7 @@ export function PostCard(props){
         const form_data = {
           "_id" : props.id
         }
-         const delete_post = await axios.post("http://localhost:3000/db/DeletePost",form_data)
+         const delete_post = await axios.post("https://speakserver.onrender.com/db/DeletePost",form_data)
          if(delete_post.data)window.location.reload()
          
       }
