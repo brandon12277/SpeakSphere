@@ -75,7 +75,7 @@ export function PostCard(props){
                        } className="no">No</button></div>
                    </div>
              </div>
-            {props.delete? <div> <button style={{zIndex:"3"}} onClick={handleBlack}  className="delete"><i class="fa-solid fa-trash"></i></button> </div> : <div></div>}
+            {props.delete? <div> <button style={{zIndex:"3"}} onClick={handleBlack}  className="delete"><i style={{color:"#78081C",transform:'scale(1.4)'}} class="fa-solid fa-trash"></i></button> </div> : <div></div>}
             <div className="context">
 
            

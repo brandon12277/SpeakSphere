@@ -31,7 +31,7 @@ export function Navbar(props){
             !isMobile
             ?
         <div className = "navbar">
-            <img style={{width:"200px",height:"auto"}}src={logo}></img>
+            <img id="logo" src={logo}></img>
              <div className='nav-contents'>
                  <a className="nav-link" href="/">Home</a>
                  <a className="nav-link" href="/Login">Login</a>

@@ -45,7 +45,7 @@ export function UserNav(props){
   !isMobile
   ?
   <div className = "navbar">
-  <img style={{width:"200px",height:"auto"}}src={logo}></img>
+  <img id="logo" src={logo}></img>
    <div className='nav-contents'>
    <a className="nav-link" href="/">Home</a>
        <a className="nav-link" href="/my-posts">My Posts</a>
@@ -74,11 +74,13 @@ export function UserNav(props){
 </div>
 :
 <div className = "navbar" style={{zIndex:"3"}}>
+
   <button style={{outline:"none",background:"none",border:"none",cursor:"pointer",marginLeft:"1%"}} onClick={()=>{
       document.querySelectorAll(".nav-contents-res")[0].style.left = "0%"
       document.getElementById("root").style.overflow= 'hidden';
       document.querySelectorAll(".blackscreen")[0].style.display = "block";
   }}><i style={{color:"white",transform:"scale(1.5)"}} class="fa-solid fa-bars"></i></button>
+
   <div style={{width:"90%",marginLeft:"2%"}}><img id="logo" src={logo}></img></div>
   <a style={{marginRight:"4%"}} className="nav-link" href="">{props.user.username} </a>
    <div className='nav-contents-res' style={{zIndex:"3"}}>
