@@ -56,10 +56,13 @@ export function Login(){
       localStorage.setItem('token', user.uid);
       localStorage.setItem('isauth', true);
       console.log(url)
-      document.querySelectorAll(".signup")[0].style.display = ""; 
+      
+      if(!url){
+        document.querySelectorAll(".signup")[0].style.display = ""; 
       document.querySelectorAll(".onload")[0].style.display = "none"; 
-      if(!url)
       navigate("/")
+      }
+      
     else
     navigate(url)
    
@@ -84,7 +87,8 @@ export function Login(){
   const loginWithGoogle = async () => {
     try {
       
-     
+      document.querySelectorAll("#google")[0].style.display = "none"; 
+      document.querySelectorAll(".onload-google")[0].style.display = "flex"; 
 		firebase
 			.auth()
 			.signInWithPopup(new firebase.auth.GoogleAuthProvider())
@@ -108,6 +112,8 @@ export function Login(){
         
         axios.post('https://speakserver.onrender.com/db/createUser', form_data)
         .then((res)=>{
+          document.querySelectorAll("#google")[0].style.display = ""; 
+      document.querySelectorAll(".onload-google")[0].style.display = "none"; 
           localStorage.setItem('token', user.uid);
           localStorage.setItem('isauth', true);
            if(!url)
@@ -185,8 +191,12 @@ export function Login(){
       </div>
       <div className="legend"><hr></hr><p className="non-highlight">Or Sign In using</p><hr></hr></div>
     <div className="socials">
-       <button className="signup" onClick={loginWithGoogle }><i class="fa-brands fa-google"></i> Google</button>
-       
+       <button id="google" className="signup" onClick={loginWithGoogle }><i class="fa-brands fa-google"></i> Google</button>
+       <div className="onload-google">
+      
+      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+   
+       </div>
       
 
     </div>

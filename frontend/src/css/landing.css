@@ -1,9 +1,7 @@
-body,html{
-    width:100%;
-    height:100%;
-    margin : 0;
-    padding:0;
- 
+
+
+ .cont{
+  overflow-x:hidden;
  }
 
  .top-component{
@@ -21,6 +19,7 @@ body,html{
  }
  .bottom-component{
     width:100%;
+    overflow-x:hidden;
    
  }
  .bottom-nav{

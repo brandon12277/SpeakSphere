@@ -62,7 +62,7 @@ if(!user && articleList === null){
     )
 }
     return(
-        <div className="cont">
+        <div className="cont-page">
             <UserNav
               user = {user}
             
