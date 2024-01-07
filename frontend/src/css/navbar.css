@@ -35,33 +35,29 @@
   
 }
  .nav-link{
-  display:flex;
-   border:2px solid transparent;
-  justify-content: center;
-  align-items: center;
-    text-decoration: none;
-    color:white;
-    font-size: medium;
-    font-family: 'Inter', sans-serif;
-    transition: border-width 0.3s ease; 
+  position: relative;
+  display: inline-block;
+  padding: 8px 25px;
+  color: #fff;
+  border: none;
+  overflow: hidden;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
  
  }
-
-
-
- .nav-link::after {
+ .nav-link::before {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0; /* Initially, the border has no width */
-  height: 2px; /* Border height */
-  background-color: #007bff;
-  transition: width 0.3s ease; /* Transition effect for the width */
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
 }
-
-.nav-link:hover::after {
-  width: 100%; /* Border appears at the bottom on hover */
+.nav-link:hover::before {
+  width: 100%;
+  left: 0;
 }
  #logo{
   width:170px;
@@ -132,8 +128,10 @@
   outline:none;
   background-color: #78081C;
   border:none;
-  font-family: 'Montaga', serif;
+  font-family: 'Inter', sans-serif;
  }
+
+
  
  
  .dropdown:hover .dropdown-content {

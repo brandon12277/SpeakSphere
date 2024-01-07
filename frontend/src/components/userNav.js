@@ -58,7 +58,7 @@ export function UserNav(props){
 </button>
 <div class="dropdown-content">
 <a className="dropdown-link" href="/NewArticle">New Post</a>
-<button className="dropdown-link" onClick={handleLogout}>Log out</button>
+<a className="dropdown-link" onClick={handleLogout}>Log out</a>
 
 </div>
 </div> 
@@ -104,7 +104,7 @@ export function UserNav(props){
 
 
 <a className="nav-link" href="/NewArticle">New Post</a>
-<button className="dropdown-link" onClick={handleLogout}>Log out</button>
+<button className="nav-link" onClick={handleLogout}>Log out</button>
 
 </div> 
        

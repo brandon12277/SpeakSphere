@@ -60,7 +60,6 @@ export function Navbar(props){
                 document.querySelectorAll(".blackscreen")[0].style.display = "none";
 
             }}><i style={{color:"white",transform:"scale(1.5)"}} class="fa-solid fa-xmark"></i></button>
-             
                  <a className="nav-link" href="/">Home</a>
                  <a className="nav-link" href="/Login">Login</a>
                  <a className="nav-link" href="/Register">Sign Up</a>

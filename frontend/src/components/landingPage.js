@@ -32,7 +32,7 @@ export function LandingPage(){
         document.getElementById("post").style.border = "none";
         document.getElementById("trending").style.border = "none";
         document.getElementById("upvote").style.border = "none";
-        document.getElementById(id).style.borderBottom = "3px solid #ec1940";
+        document.getElementById(id).style.borderBottom = "2px solid #ec1940";
 
         if(id == "trending"){
             if(!trend){

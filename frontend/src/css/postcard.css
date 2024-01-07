@@ -30,8 +30,9 @@
 
  
  #descp{
+    width:95%;
     display: -webkit-box;
-            -webkit-line-clamp: 3; /* Adjust the number of lines to show before truncating */
+            -webkit-line-clamp: 5; 
             -webkit-box-orient: vertical;
             overflow: hidden;
  }
@@ -49,8 +50,8 @@
  #post_img{
   display: flex;
   justify-self: flex-end;
-   width:250px;
-   height:auto;
+   width:auto;
+   height:200px;
  }
 
  .list{
