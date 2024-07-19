@@ -34,14 +34,15 @@ def filter():
        
            
             image_bytes = base64.b64decode(image_url.split(",")[1])
-            image_pil = Image.open(BytesIO(image_bytes))
 
             
             image_pil_resized = image.load_img(BytesIO(image_bytes), target_size = (64, 64))
             image_np_resized = image.img_to_array(image_pil_resized)
             resized_img_array = np.expand_dims(image_np_resized, axis=0)
-           
+             
+            print("Start prediction") 
             result = cnn.predict(resized_img_array)
+            print("End prediction") 
             
             class_label = -1
 
@@ -56,7 +57,7 @@ def filter():
         else:
             response = jsonify({'class': 1})
 
-        response.headers.add('Access-Control-Allow-Origin', 'https://speaksphere.onrender.com/')
+       
         response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
 
