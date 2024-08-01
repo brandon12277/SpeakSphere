@@ -12,6 +12,7 @@ import { Article } from "./components/ArticleDisplay";
 import { ArticleCard } from "./components/ArticleCard";
 import Comment_Box from "./components/CommentBox";
 import Footer from "./components/Footer";
+import { UpdateArticle } from "./components/Update_Article";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/NewArticle" element={<NewArticle/>} />
         <Route path="/my-posts" element={<UserPostPage/>} />
         <Route path="/:article/:id" element={<Article/>} />
+        <Route path="my-posts/UpdateArticle/:article/:id" element={<UpdateArticle/>} />
         
        </Routes>
     </Router>

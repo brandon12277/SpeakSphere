@@ -15,7 +15,7 @@ export function PostCard(props){
     const [isMobile, setIsMobile] = useState(false);
     const handleClick = () =>{
      
-           window.location.href=`/${encodeURIComponent(props.article_name)}/${encodeURIComponent(props.id)}`
+           navigate(`/${encodeURIComponent(props.article_name)}/${encodeURIComponent(props.id)}`)
       }
       const getPlainText = (html) => {
         // Create a temporary element to parse the HTML content
@@ -44,6 +44,8 @@ export function PostCard(props){
         event.stopPropagation()
         
        }
+
+
       async function handleDelete(){
         const form_data = {
           "_id" : props.id
@@ -58,12 +60,19 @@ export function PostCard(props){
        
 
       
-           <div className="card_body" onClick={
+           < div style={{cursor:"auto"}} className="card_body"  
+
+            
+            onClick={
             ()=>{
-                if(divclick)
+                if(divclick && !props.delete)
                   {handleClick()}
             }
-            }>
+            
+
+          }
+          
+             >
              <div id="black" className={delete_class}>
                    <div className="block">
                        <p>Are you sure you want to delete this post?</p>
@@ -75,7 +84,15 @@ export function PostCard(props){
                        } className="no">No</button></div>
                    </div>
              </div>
-            {props.delete? <div> <button style={{zIndex:"3"}} onClick={handleBlack}  className="delete"><i style={{color:"#78081C",transform:'scale(1.4)'}} class="fa-solid fa-trash"></i></button> </div> : <div></div>}
+
+             <div className='' style={{display:"flex",gap : "10%",marginBottom:"3%"}}>
+
+             {props.delete? <div> <button style={{zIndex:"3"}} onClick={handleBlack}  className="delete"><i style={{color:"#78081C",transform:'scale(1.3)'}} class="fa-solid fa-trash"></i></button> </div> : <div></div>}
+             {props.update? <div> <button style={{zIndex:"3"}} onClick={(e)=>{e.preventDefault(); navigate("UpdateArticle/"+props.article_name+"/"+props.id)}}  className="delete"><i style={{color:"#78081C",transform:'scale(1.3)'}} class="fa-solid fa-pen"></i></button> </div> : <div></div>}
+             {props.update? <div> <button style={{zIndex:"3"}} onClick={(e)=>{handleClick()}}  className="delete"><i style={{color:"#78081C",transform:'scale(1.3)'}} class="fa-solid fa-eye"></i></button> </div> : <div></div>}
+
+             </div>
+            
             <div className="context">
 
            

@@ -112,6 +112,7 @@ export function ArticleCard(props){
 
      if(add_comment.data.done){
         document.querySelectorAll(".comment_bar")[0].value = "";
+
         let comment_new = <Comment_Box
         comment_id = {add_comment.data.comment_id}
         _id = {id}
@@ -272,7 +273,7 @@ return(
              
         </div>
         <div className="comment_box">
-            <h2 style={{ fontFamily: "'Lato', sans-serif"}}>{props.data.comments.length} Comments</h2>
+            <h2 style={{ fontFamily: "'Lato', sans-serif"}}>{props.data.comments.length + child_comment.length} Comments</h2>
             <input  onFocus={handleSubmitButton} onChange={handleChange} type= "text" name="comment" className="comment_bar" id="comment_bar" placeholder='Add a Comment'></input>
             <div className="button_div_comments">
                <button onClick={()=>{AddComment(props.data._id,props.user.firebaseUid,props.user.username)}} className="comment_butt">Comment</button>

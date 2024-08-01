@@ -29,6 +29,7 @@ export function UserPostPage(){
                 upvotes = {article.upvotes.length}
                 downvotes = {article.downvotes.length}
                 delete = {true}
+                update = {true}
                 />
                
               

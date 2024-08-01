@@ -4,25 +4,27 @@ import "../css/create_article.css"
 import { UserNav } from './userNav';
 import { useNavigate } from 'react-router-dom';
 
+import { useParams } from 'react-router-dom';
 import RichTextEditor from './RichTextEditor';
 import Footer from './Footer';
 
-export function NewArticle(){
+export function UpdateArticle(){
     
     const userid = localStorage.getItem('token')
     const isauth = localStorage.getItem('isauth')
 
-    
     const [blackscreen,setBlack] = useState(null)
     const [loader,setLoader] = useState(null)
 
-
+    let{ article, id } = useParams();
     const navigate = useNavigate();
    console.log(isauth)
    const fileInputRef = useRef(null);
    const [inputVal,setVal] = useState("")
     const [user,setuser] = useState("");
     const [file,setFile] = useState(null)
+    const [ post,setPost] = useState(null)
+    
     const [formData, setFormData] = useState({
         name : "",
         description : "",
@@ -36,17 +38,44 @@ export function NewArticle(){
       fileInputRef.current.click();
     };
 
- async function fetchData(){
-    try{
-        let userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
-        setuser(userCred.data)
- 
+    async function fetchData(){
+        try{
+            console.log(id)
+            let userCred;
+            if(userid){
+               userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
+               setuser(userCred.data)
+            }
+            
+            let article = await axios.get('https://speakserver.onrender.com/db/FindArticle?id='+id)
+
+           
+
+            if(article.data.username !== userCred.data.username){
+                navigate("/")
+                return;
+            }
+           
+            console.log(article.data.description);
+
+            // Combine all state updates into a single call
+            setFormData({
+              description: article.data.description,
+              name: article.data.article_name,
+              image: article.data.article_img
+            });
+
+          
+            
+     
+         }
+         catch(err){
+           console.log(err)
+         }
      }
-     catch(err){
-       console.log(err)
-     }
- }
  const handleImageChange = (e) => {
+
+    console.log(formData)
     const { name, value } = e.target;
     
     const selectedFile = e.target.files[0];
@@ -66,14 +95,13 @@ export function NewArticle(){
       reader.readAsDataURL(selectedFile);
     }
   };
-  const highlightText = (content) => {
-    // You can customize the highlighting logic based on your requirements
-    const highlightedValue = `<span style="background-color: yellow">${content}</span>`;
+//   const highlightText = (content) => {
+//     // You can customize the highlighting logic based on your requirements
+//     const highlightedValue = `<span style="background-color: yellow">${content}</span>`;
     
-    // Set the highlighted value to a div or span
-    return <div dangerouslySetInnerHTML={{ __html: highlightedValue }} />;
-  };
-
+//     // Set the highlighted value to a div or span
+//     return <div dangerouslySetInnerHTML={{ __html: highlightedValue }} />;
+//   };
 
   const handleSubmit = async () =>{
     try{
@@ -193,7 +221,7 @@ export function NewArticle(){
 
     
       console.log(formData)
-        let article = await axios.post('https://speakserver.onrender.com/db/addArticles',formData)
+        let article = await axios.post('http://localhost:3000/db/updateArticle/'+id,formData)
         if(article.data){
             console.log(article.data)
             navigate("/")
@@ -205,13 +233,11 @@ export function NewArticle(){
        
 
   }
-
- 
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name,value)
     if(name === "name" && value===''){
-      console.log("hi there")
+      
       document.getElementById("article_name").style.backgroundColor = "white"
     }
     setFormData({
@@ -233,11 +259,11 @@ export function NewArticle(){
     });
   };
 
- useEffect(()=>{
+ useEffect( ()=>{
     if(!isauth){
         navigate("/Login")
      }
-      fetchData()
+     fetchData()
     
 
 
@@ -254,7 +280,8 @@ if(!user){
 }
 return (
   <div>
-     {
+
+    {
         blackscreen?
     
    <div className="blackscreen_warning">
@@ -288,11 +315,15 @@ return (
    :
    <></>
 }
+
+        
   
     <div className="homepage">
       <UserNav
          user = {user}
       />
+
+<h1  className='' style={{ margin:"2%",fontFamily:"Montaga, serif"  }}>Update Post</h1>
     <div className="createArticle">
     <div className="article_form">
       
@@ -304,29 +335,49 @@ return (
             <i class="fa-solid fa-circle"></i>
            </div>
          </div>
-        
-         <div onClick={handleButtonClick} className="img_div" htmlFor="upload" style={{ backgroundImage: `url(${formData.image})` }}>
-         <input ref={fileInputRef} style={{display:"none"}}  type="file" name="file" onChange={handleImageChange}  id="upload" accept="image/png, image/jpg, image/jpeg"></input>
-         <div id="image_button">
+         {
+            formData.image || formData.image == ""?
 
-         
-         
-         Select Image File
-         </div>
-        </div>
+            <div onClick={handleButtonClick} className="img_div" htmlFor="upload" style={{ backgroundImage: `url(${formData.image})` }}>
+            <input ref={fileInputRef} style={{display:"none"}}  type="file" name="file" onChange={handleImageChange}  id="upload" accept="image/png, image/jpg, image/jpeg"></input>
+            <div id="image_button">
+   
+            
+            
+            Select Image File
+            </div>
+           </div>
+           :
+           <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+         }
+        
+        
        
         <div className="article_name_descp">
           <p>Article Name</p>
+          {
+            formData.name ?
            <input id="article_name" value={formData.name}  type="type" name="name" onChange={handleChange}></input>
+           :
+           <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+          }
            <p id= "name_warn" style={{display:"none",color:"red"}}>
           Article Name field is empty
           </p>
-           <RichTextEditor editorContent={formData.description} setEditorContent={handleEditorChange} />
-           <button onClick={handleSubmit} className="submit">Create Post</button>
+           {
+            formData.description ?
+            <RichTextEditor editorContent={formData.description} setEditorContent={handleEditorChange} />
+            :
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+           }
+          
+           <button onClick={handleSubmit} className="submit">Update Post</button>
           
        </div>
        
-       {/* <div dangerouslySetInnerHTML={{ __html: formData.description }} /> */}
+     
 
 
    </div>
@@ -339,6 +390,7 @@ return (
    :
    <></>
    }
+   
    
     </div>
 

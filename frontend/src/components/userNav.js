@@ -104,7 +104,7 @@ export function UserNav(props){
 
 
 <a className="nav-link" href="/NewArticle">New Post</a>
-<button className="nav-link" onClick={handleLogout}>Log out</button>
+<button className="nav-link" style={{background : "none",cursor:"pointer"}} onClick={handleLogout}>Log out</button>
 
 </div> 
        

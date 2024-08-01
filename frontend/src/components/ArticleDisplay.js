@@ -40,7 +40,6 @@ export function Article(){
         let article = await axios.get('https://speakserver.onrender.com/db/FindArticle?id='+id)
        
        
-       
 
         
         setPost(article.data)

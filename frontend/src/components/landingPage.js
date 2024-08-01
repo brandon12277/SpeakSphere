@@ -104,7 +104,7 @@ export function LandingPage(){
         }
         
         let newposts = await axios.get('https://speakserver.onrender.com/db/FindRandomPosts')
-        document.querySelectorAll(".footer")[0].style.display = "flex"
+        // document.querySelectorAll(".footer")[0].style.display = "flex"
         const list = newposts.data.map(article => (
             <PostCard
             id = {article._id}
