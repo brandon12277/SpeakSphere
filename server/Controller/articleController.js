@@ -80,6 +80,32 @@ exports.findRandomArticles = async (req,res) =>{
 
 }
 
+exports.UpdateArticle = async (req,res) =>{
+  
+    const { id } = req.params;
+    const { description, name, image } = req.body;
+
+    
+  
+    try {
+      const article = await Articles.findByIdAndUpdate(
+        id,
+        { descriptio : description, article_name : name, article_img : image },
+        { new: true } 
+      );
+  
+      if (!article) {
+        return res.status(404).send('Article not found');
+      }
+    console.log("Updated")
+      res.status(200).json(article);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  
+  
+}
+
 
 exports.findMostUpvoted = async (req,res) =>{
   try{ 

@@ -52,6 +52,8 @@ router.route("/ValidateNewUser")
 
 router.post("/addArticles",upload.single('file'),articleController.addArticles)
 router.route("/DeletePost").post(articleController.DeletePost)
+
+router.route("/updateArticle/:id").post(articleController.UpdateArticle)
 .post(userController.validateNewUser)
 
 
