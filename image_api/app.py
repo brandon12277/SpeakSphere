@@ -6,10 +6,10 @@ from urllib import request as req
 import sklearn
 from PIL import Image
 from io import BytesIO
-import tensorflow 
-from keras.models import load_model
-from keras.preprocessing import image
-from keras.applications.inception_v3 import preprocess_input, decode_predictions
+import tensorflow as tf
+from tensorflow.keras.preprocessing import image # type: ignore
+from tensorflow.keras.preprocessing import image # type: ignore
+
 import base64
 import os
 import random
