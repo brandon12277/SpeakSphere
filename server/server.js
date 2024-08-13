@@ -17,6 +17,8 @@ app.use('/db', router);
 
 
 
+
+
 mongoose.connect(process.env.CONN_STR,{
     useNewUrlParser:true,
     useUnifiedTopology:true
@@ -28,6 +30,24 @@ mongoose.connect(process.env.CONN_STR,{
     console.error('Error :', error);
   
   });
+
+
+  app.get("/getpost",(req,res)=>{
+       
+    return res.status(200).json("");
+     
+  })
+
+  function makeRequest() {
+    fetch("https://speakserver.onrender.com/getpost")
+        .then(() => console.log("up and running"))
+        .catch(err => console.log("opps! server down"))
+}
+
+
+makeRequest();
+
+setInterval(makeRequest, 13 * 60 * 1000)
 
 
 
