@@ -73,7 +73,7 @@ if(!user && articleList === null){
         
          !articleList || articleList.length == 0
         ?
-        <div className="empty"><i class="fa-solid fa-newspaper"></i>No posts currently <a className="dropdown-link" href="/Account/NewArticle">Create a Post</a></div>
+        <div className="empty"><i class="fa-solid fa-newspaper"></i>No posts currently <a className="dropdown-link" href="/NewArticle">Create a Post</a></div>
         :
         <div className="list">{articleList}</div>
 
