@@ -193,7 +193,7 @@ export function NewArticle(){
 
     
       console.log(formData)
-        let article = await axios.post('http://localhost:3000/db/addArticles',formData)
+        let article = await axios.post('https://speakserver.onrender.com/db/addArticles',formData)
         if(article.data){
             console.log(article.data)
             navigate("/")

@@ -221,7 +221,7 @@ export function UpdateArticle(){
 
     
       console.log(formData)
-        let article = await axios.post('http://localhost:3000/db/updateArticle/'+id,formData)
+        let article = await axios.post('https://speakserver.onrender.com/db/updateArticle/'+id,formData)
         if(article.data){
             console.log(article.data)
             navigate("/")
