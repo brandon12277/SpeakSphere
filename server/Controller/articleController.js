@@ -357,7 +357,7 @@ exports.AddComment = async (req,res) =>{
 
     }
     
-    const make_comment = await Articles.updateOne(
+    const make_comment = await Articles.findOneAndUpdate(
         {
           "_id" : id
          
