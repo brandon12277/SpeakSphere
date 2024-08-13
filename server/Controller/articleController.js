@@ -36,6 +36,7 @@ function getCurrentDateTimeString() {
 }
 
 async function file_url(file){
+  console.log(file)
   const storageRef = ref(storage, "article_images/"+file.originalname+getCurrentDateTimeString());
   
   await uploadString(storageRef, file, 'data_url'); 
@@ -84,10 +85,10 @@ exports.UpdateArticle = async (req,res) =>{
      
     let img_url = ""
     console.log(image)
-    if(image || image!=""){img_url = await file_url(image)}
+    if(image && image!="" && !image.startsWith("https")){img_url = await file_url(image)}
     
     let update_data;
-    if(image || image!="")
+    if(image && image!="" && !image.startsWith("https"))
      update_data =  { description : description, article_name : name, article_img : img_url }
     else
     update_data =  { description : description, article_name : name }
