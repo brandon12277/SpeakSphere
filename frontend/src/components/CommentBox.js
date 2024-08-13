@@ -17,7 +17,7 @@ export default function Comment_Box(props){
     
     
    useEffect(()=>{
-    let comments = props.replies.map((reply) =>(
+    let replies = props.replies.map((reply) =>(
 
       <Reply
         comment_id = {props.comment_id}
@@ -29,7 +29,7 @@ export default function Comment_Box(props){
 
   ))
 
-  setDisplayReplies(comments)
+  setDisplayReplies(replies)
    },[])
 
     const handleSubmitButton = () =>{

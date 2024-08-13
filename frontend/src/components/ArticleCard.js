@@ -15,7 +15,7 @@ import Comment_Box from './CommentBox';
 
 export function ArticleCard(props){
   let stats = [];
-  const [changestat,setChange] = useState([])
+  
   const [child_comment,setChild] = useState([])
   const [comment,setComment] = useState("")
   const [comments_bar,setDisplayComments] = useState("")
@@ -28,6 +28,7 @@ export function ArticleCard(props){
   useEffect(()=>{
      
   },[comments_bar])
+
   useEffect(()=>{
    
       
@@ -58,7 +59,7 @@ export function ArticleCard(props){
       }
 
       let give_neutral_vote = await axios.post("https://speakserver.onrender.com/db/handlevote",formdata)
-      setChange([])
+      
   
       
 
@@ -70,6 +71,7 @@ export function ArticleCard(props){
     return () => clearTimeout(timerId);
 
   },[])
+
   function containsElement(arr, elementToFind) {
 
 
@@ -186,7 +188,7 @@ export function ArticleCard(props){
 
          let update_of_vote = await axios.post("https://speakserver.onrender.com/db/handlevote",formdata)
           console.log(update_of_vote)
-          setChange([])
+          
          
   
    
@@ -201,8 +203,8 @@ export function ArticleCard(props){
       datasets: [
         {
           label: 'No Opinion Given',
-          backgroundColor: ['grey'], // Set colors for each segment
-          data: [1], // Your data here
+          backgroundColor: ['grey'],
+          data: [1], 
         },
       ],
     }

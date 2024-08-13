@@ -69,9 +69,12 @@
    gap:1%;
    width:100%;
  }
+ .delete_post{
+  background-color: red;
+ }
  .delete,.delete_post,.no{
   
-  background:none;
+  
   margin-top: 2%;
   margin-bottom: 2%;
   margin-right:2%;
@@ -80,6 +83,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  
 }
 .no{
   background-color:lightgreen;

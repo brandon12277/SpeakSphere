@@ -159,10 +159,10 @@ exports.handleVote = async (req,res) =>{
     const userIdToCheck = req.body.firebaseUid
     const category = req.body.category
      
-    const given_upvote = await voter.checkUpvotepPresent(req.body._id,userIdToCheck,"upvotes")
-    const given_downvote = await voter.checkUpvotepPresent(req.body._id,userIdToCheck,"downvotes")
-    const given_neutralvote = await voter.checkUpvotepPresent(req.body._id,userIdToCheck,"neutralvotes")
-    const given_changedvote = await voter.checkUpvotepPresent(req.body._id,userIdToCheck,"changedvotes")
+    const given_upvote = await voter.checkvotepPresent(req.body._id,userIdToCheck,"upvotes")
+    const given_downvote = await voter.checkvotepPresent(req.body._id,userIdToCheck,"downvotes")
+    const given_neutralvote = await voter.checkvotepPresent(req.body._id,userIdToCheck,"neutralvotes")
+    const given_changedvote = await voter.checkvotepPresent(req.body._id,userIdToCheck,"changedvotes")
 
         if(given_downvote && category === "downvotes") return res.status(200).json(1)
         if(given_upvote && category === "upvotes") return res.status(200).json(1)
@@ -255,7 +255,7 @@ exports.findTrendingArticles = async (req,res) =>{
         }
       },
       {
-        $limit: 10  // Limit the result to 10 documents
+        $limit: 10  
       }
     ]);
     res.status(200).json(trend_posts)
@@ -357,7 +357,7 @@ exports.AddComment = async (req,res) =>{
 
     }
     
-    const make_comment = await Articles.findOneAndUpdate(
+    const make_comment = await Articles.updateOne(
         {
           "_id" : id
          
@@ -397,8 +397,8 @@ exports.AddReply = async (req,res) =>{
          "username" : req.body.username
       },
       "content" : req.body.content,
-      "choice" : req.body.choice,
-      replies: []
+      "choice" : req.body.choice
+      
 
     }
     
@@ -450,8 +450,8 @@ exports.FindArticles = async (req,res)=>{
 exports.CheckVotestatus = async (req,res)=>{
   try{
      console.log(req.query.id,req.query.userid)
-    const given_upvote = await voter.checkUpvotepPresent(req.query.id,req.query.userid,"upvotes")
-    const given_downvote = await voter.checkUpvotepPresent(req.query.id,req.query.userid,"downvotes")
+    const given_upvote = await voter.checkvotepPresent(req.query.id,req.query.userid,"upvotes")
+    const given_downvote = await voter.checkvotepPresent(req.query.id,req.query.userid,"downvotes")
     
       
       if(given_upvote){

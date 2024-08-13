@@ -1,5 +1,5 @@
 import {React,useEffect,useState} from 'react';
-import ReactDOM from 'react-dom/client';
+
 import { Navbar } from './navbar';
 import "../css/landing.css"
 
@@ -7,7 +7,7 @@ import axios from "axios"
 import { PostCard } from './postCard';
 import { UserNav } from './userNav';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer';
+
 
 
 
@@ -25,6 +25,14 @@ export function LandingPage(){
     const [random,setRandom] = useState(null);
     const [trend,setTrend] = useState(null);
     const [upvoted,setMost] = useState(null);
+
+    const disableScroll = () => {
+        document.body.style.overflow = "hidden";
+      };
+
+      const enableScroll = () => {
+        document.body.style.overflow = "auto";
+      };
     
     const handleClick= async (e) => {
         let id = e.target.id 
@@ -93,13 +101,15 @@ export function LandingPage(){
 
  async function fetchData(){
 
-    document.querySelectorAll(".footer")[0].style.display = "none"
+   
+
+    
     document.getElementById("root").style.overflowY = "auto"
     localStorage.removeItem('url')
     TextTickingAnimation()
     try{
         let userCred = null
-        if(userid!=null){
+        if(userid){
             userCred = await axios.get('https://speakserver.onrender.com/db/FindUser?userid='+userid)
         }
         
@@ -121,7 +131,8 @@ export function LandingPage(){
         ))
         if(userCred)setuser(userCred.data)
         setRandom(list)
-        setPosts(list)
+        setPosts(posts => list)
+       
 
  
      }
@@ -150,7 +161,9 @@ export function LandingPage(){
     }
     
     useEffect(()=>{
+        disableScroll()
         fetchData()
+        enableScroll()
         return () => {}
     },[])
     if(!isauth){

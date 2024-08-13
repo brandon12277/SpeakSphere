@@ -1,6 +1,5 @@
 const express= require("express")
 const mongoose = require("mongoose")
-const morgan = require("morgan")
 const dotenv = require("dotenv")
 dotenv.config({path: './config/config.env'})
 const bodyParser = require('body-parser');
@@ -22,10 +21,13 @@ mongoose.connect(process.env.CONN_STR,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 }).then((conn)=>{
-    // console.log(conn)
     console.log("DB connection succesfull")
 
 })
+.catch((error) => {
+    console.error('Error :', error);
+  
+  });
 
 
 

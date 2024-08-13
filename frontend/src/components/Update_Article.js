@@ -107,7 +107,7 @@ export function UpdateArticle(){
     try{
 
       let len = formData.description
-      .replace(/<[^>]*>/g, ' ') // Remove HTML tags
+      .replace(/<[^>]*>/g, ' ') 
       .split(/\s+/)
       .filter(Boolean)
       .length
@@ -118,7 +118,7 @@ export function UpdateArticle(){
       }
        document.querySelectorAll(".article_form")[0].style.display = "none";
        setLoader(1)
-    //    document.querySelectorAll(".footer")[0].style.display = "none";
+   
        
         let form_data = formData
         let text = getPlainText(formData.description)

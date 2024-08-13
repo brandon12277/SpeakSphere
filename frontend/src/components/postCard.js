@@ -17,19 +17,13 @@ export function PostCard(props){
      
            navigate(`/${encodeURIComponent(props.article_name)}/${encodeURIComponent(props.id)}`)
       }
-      const getPlainText = (html) => {
-        // Create a temporary element to parse the HTML content
-        const tempElement = document.createElement('div');
-        tempElement.innerHTML = html;
-        // Extract the text content
-        return tempElement.textContent || tempElement.innerText || '';
-      };
+      
       useEffect(() => {
         const handleResize = () => {
           setIsMobile(window.innerWidth <= 480);
         };
     
-        handleResize(); // Set initial state based on current window width
+        handleResize(); 
     
         window.addEventListener('resize', handleResize);
     
@@ -76,7 +70,8 @@ export function PostCard(props){
              <div id="black" className={delete_class}>
                    <div className="block">
                        <p>Are you sure you want to delete this post?</p>
-                       <div style={{width:"100%",gap:"5%"}}><button id={delete_class} onClick={handleDelete} className="delete_post">Yes</button><button onClick={
+                       <div style={{width:"100%",gap:"5%"}}>
+                        <button  onClick={handleDelete} className="delete_post">Yes</button><button onClick={
                         ()=>{
                           document.querySelectorAll("."+delete_class)[0].style.display = "none";
                           setClick(true)

@@ -3,7 +3,7 @@ const Articles = require("./../models/article")
 const { ObjectId } = require('mongodb');
 
 
-exports.checkUpvotepPresent = async (_id,firebaseUid,category) =>{
+exports.checkvotepPresent = async (_id,firebaseUid,category) =>{
 
     const id = new ObjectId(_id)
     const checkvote = await Articles.find({

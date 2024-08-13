@@ -32,7 +32,6 @@ export function NewArticle(){
     
  
     const handleButtonClick = () => {
-      // Trigger the file input click event
       fileInputRef.current.click();
     };
 
@@ -90,7 +89,7 @@ export function NewArticle(){
       }
        document.querySelectorAll(".article_form")[0].style.display = "none";
        setLoader(1)
-    //    document.querySelectorAll(".footer")[0].style.display = "none";
+    
        
         let form_data = formData
         let text = getPlainText(formData.description)
@@ -111,13 +110,11 @@ export function NewArticle(){
         let check_form = {
           "description" : text
         }
-        if(formData.image == ""){
-         
-        }
+       
         let check_img = null
         if(file){
         formImg.append('image', file);
-        check_img = await axios.post('https://aed6-45-112-68-210.ngrok-free.app/image_filter',formImg)
+        check_img = await axios.post('https://2f7e-45-112-68-67.ngrok-free.app/image_filter',formImg)
         }
         const check_name = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form_name)
         const check_descp = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form)
@@ -136,16 +133,19 @@ export function NewArticle(){
         if(class_label == 0 ||  class_label ==2){
           setLoader(null)
           setBlack(1) 
-          document.getElementById("ar_img").style.display = "flex" 
+          document.getElementById("ar_img").style.display = "flex"
+          return; 
         }
+
         if(name.length>0){
             setLoader(null)
             setBlack(1)  
-             document.getElementById("ar_name").style.display = "block" 
-            
+            document.getElementById("ar_name").style.display = "block" 
+            return;
             
              
         }
+
         if(descp.length>0){
           setLoader(null)
           setBlack(1)  
@@ -161,7 +161,7 @@ export function NewArticle(){
             spanElem.textContent= elem+"."
             console.log(idx)
             if(idx === descp[itr]){
-              <span style={{backgroundColor:"#fdeb37"}}>{formData.name}</span>
+              // <span style={{backgroundColor:"#fdeb37"}}>{formData.name}</span>
               console.log(defined[idx])
               defined[idx] = "<span style='background-color:#fdeb37'>"+defined[idx]+"</span>"
               descp_p.append(spanElem)
@@ -187,9 +187,9 @@ export function NewArticle(){
             
           
          
-
+          return;
      }
-     if(name.length>0 || descp.length>0 || class_label == 0 ||  class_label ==2)return;
+    
 
     
       console.log(formData)
@@ -211,7 +211,6 @@ export function NewArticle(){
     const { name, value } = e.target;
     console.log(name,value)
     if(name === "name" && value===''){
-      console.log("hi there")
       document.getElementById("article_name").style.backgroundColor = "white"
     }
     setFormData({

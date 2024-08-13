@@ -1,5 +1,5 @@
 const User  = require("./../models/user")
-const mongoose = require("mongoose")
+
 
 exports.createUser = async (req,res) => {
    try{
@@ -12,7 +12,7 @@ exports.createUser = async (req,res) => {
    }
    catch(err){
     console.log(err)
-    res.status(400).json("Internal Error while logging In")
+    res.status(400).json("Error while logging In")
    }
    
 }
@@ -67,14 +67,14 @@ exports.validateNewUser = async (req,res) => {
         $or: [
           { username: req.body.username },
           { email: req.body.email },
-          { phone: req.body.phone }
+          { phoneg: req.body.phone }
         ]
       });
   
      
       
       if(users.length){
-        console.log(users[0].phone)
+        
         if(users[0].username == req.body.username)
         return res.status(400).json(
            "Username already exists"
@@ -85,7 +85,7 @@ exports.validateNewUser = async (req,res) => {
             "This email is already registered"
         )
 
-        if(users[0].phone == req.body.phone && (users[0].phone!=null || users[0].phone!=""))
+        if(users[0].phoneg == req.body.phone && (users[0].phoneg!=null || users[0].phoneg!=""))
         return res.status(400).json(
             "This mobile number is already registered"
         )
