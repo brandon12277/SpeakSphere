@@ -11,9 +11,10 @@ port = process.env.PORT || 5000
 
 
 const router = require('./Routes/index');
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '400mb' }));
 app.use(cors());
 app.use('/db', router);
+
 
 
 

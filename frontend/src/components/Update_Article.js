@@ -123,7 +123,7 @@ export function UpdateArticle(){
         let form_data = formData
         let text = getPlainText(formData.description)
         console.log(text)
-        form_data["file"]=file
+        
         form_data["firebaseUid"] = userid
         form_data["username"] = user.username
         console.log(form_data)

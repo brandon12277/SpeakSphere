@@ -7,7 +7,7 @@ import sklearn
 from PIL import Image
 from io import BytesIO
 import tensorflow as tf
-from tensorflow.keras.preprocessing import image # type: ignore
+from tensorflow.keras.models import load_model # type: ignore
 from tensorflow.keras.preprocessing import image # type: ignore
 
 import base64
