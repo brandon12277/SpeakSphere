@@ -81,14 +81,22 @@ exports.UpdateArticle = async (req,res) =>{
     const name = req.body.name
     const description = req.body.description
     const image = req.body.image
-
+     
+    let img_url = ""
     console.log(image)
-    if(image){img_url = await file_url(image)}
+    if(image || image!=""){img_url = await file_url(image)}
+    
+    let update_data;
+    if(image || image!="")
+     update_data =  { description : description, article_name : name, article_img : img_url }
+    else
+    update_data =  { description : description, article_name : name }
+    
   
     try {
       const article = await Articles.findByIdAndUpdate(
-        id,
-        { description : description, article_name : name, article_img : img_url },
+        id,update_data
+       ,
         { new: true } 
       );
   
