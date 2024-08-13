@@ -306,7 +306,7 @@ return (
           document.querySelectorAll("#ar_name")[0].style.display="none"
           document.querySelectorAll("#ar_descp")[0].style.display="none"
           document.querySelectorAll(".article_form")[0].style.display = "flex";
-          document.querySelectorAll(".footer")[0].style.display = "flex";
+         
           
         }} className="make_change">Make Changes</button>
      </div>
