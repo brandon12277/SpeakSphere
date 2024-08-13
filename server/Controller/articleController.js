@@ -4,7 +4,7 @@ const { initializeApp } =require("firebase/app");
 const firebaseConfig =require("../config/firebaseConfig.js");
 // import { getStorage, ref,getDownloadURL, uploadBytes } from "firebase/storage";
 
-const { getStorage, ref,getDownloadURL, uploadBytesResumable } = require("firebase/storage")
+const { getStorage, ref,getDownloadURL, uploadBytesResumable,uploadString } = require("firebase/storage")
 const { ObjectId } = require('mongodb');
 
 const voter = require("./VotingFunctions.js")
@@ -37,14 +37,9 @@ function getCurrentDateTimeString() {
 
 async function file_url(file){
   const storageRef = ref(storage, "article_images/"+file.originalname+getCurrentDateTimeString());
-
-  // Upload the image
   
-  const metadata = {
-    contentType  : file.mimetype
-  }
-  const snapshot = await uploadBytesResumable(storageRef, file.buffer,metadata)
-  const DownloadURL = await getDownloadURL(snapshot.ref)
+  await uploadString(storageRef, file, 'data_url'); 
+  const DownloadURL = await getDownloadURL(storageRef);
 
   return DownloadURL
 }
@@ -83,14 +78,17 @@ exports.findRandomArticles = async (req,res) =>{
 exports.UpdateArticle = async (req,res) =>{
   
     const { id } = req.params;
-    const { description, name, image } = req.body;
+    const name = req.body.name
+    const description = req.body.description
+    const image = req.body.image
 
-    
+    console.log(image)
+    if(image){img_url = await file_url(image)}
   
     try {
       const article = await Articles.findByIdAndUpdate(
         id,
-        { descriptio : description, article_name : name, article_img : image },
+        { description : description, article_name : name, article_img : img_url },
         { new: true } 
       );
   
@@ -287,12 +285,14 @@ exports.DeletePost = async (req,res) =>{
 }
 exports.addArticles = async (req,res) =>{
 
-    const img_file = req.file;
+   
     
     const article_name = req.body.name
     const article_descp = req.body.description
+    const image = req.body.image
     let img_url = ""
-    if(img_file){img_url = await file_url(img_file)}
+    if(image){img_url = await file_url(image)}
+    
     const new_article = {
       "firebaseUid" : req.body.firebaseUid,
       "username" : req.body.username,

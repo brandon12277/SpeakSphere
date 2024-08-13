@@ -193,7 +193,7 @@ export function NewArticle(){
 
     
       console.log(formData)
-        let article = await axios.post('https://speakserver.onrender.com/db/addArticles',formData)
+        let article = await axios.post('http://localhost:3000/db/addArticles',formData)
         if(article.data){
             console.log(article.data)
             navigate("/")
@@ -278,7 +278,7 @@ return (
           document.querySelectorAll("#ar_name")[0].style.display="none"
           document.querySelectorAll("#ar_descp")[0].style.display="none"
           document.querySelectorAll(".article_form")[0].style.display = "flex";
-          document.querySelectorAll(".footer")[0].style.display = "flex";
+         
           
         }} className="make_change">Make Changes</button>
      </div>

@@ -34,7 +34,7 @@ class UniqueUIDGenerator:
 
 generator = UniqueUIDGenerator()
 
-cnn = load_model('image_filter_2.h5')
+cnn = load_model('image_filter.h5')
 print("IN")
 @app.route('/image_filter',methods=['POST'])
 def filter():
@@ -49,14 +49,9 @@ def filter():
             file.save(url)
 
          img = image.load_img(url, target_size=(64,64))
-    # Convert the image to a NumPy array
+  
          img_array = image.img_to_array(img)
-    # Expand dimensions to match the input shape of the model (batch size, height, width, channels)
-       
-      #   image_url = request.json
-      #   image_url = image_url.get('image')
-       
-      #   if image_url != "":
+   
 
 
 
@@ -69,9 +64,9 @@ def filter():
      
          resized_img_array = np.expand_dims(img_array, axis=0)
              
-         print("Start prediction")
+        
          result = cnn.predict(resized_img_array)
-         print("End prediction")
+        
 
          class_label = -1
          if result[0][0] == 1:
@@ -80,6 +75,8 @@ def filter():
             class_label = 1
          else:
             class_label = 2
+         
+         print(result[0])
 
          os.remove(url)
 
