@@ -1,10 +1,7 @@
 import {React,useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios"
-import { UserNav } from './userNav';
-import { useNavigate } from 'react-router-dom';
-import { PostCard } from './postCard';
-import photo from "../static/thinker.jpg"
+
 import "../css/article_card.css"
 import PieChart from './PieChart';
 import BarChart from './BarChart';
@@ -16,6 +13,7 @@ import Comment_Box from './CommentBox';
 export function ArticleCard(props){
   let stats = [];
   
+  const [addComm,setLoad] = useState(1)
   const [child_comment,setChild] = useState([])
   const [comment,setComment] = useState("")
   const [comments_bar,setDisplayComments] = useState("")
@@ -79,7 +77,8 @@ export function ArticleCard(props){
   }
 
   async function AddComment(id,userid,username){
-
+       
+       setLoad(null)
  
        if(!userid){
         document.querySelectorAll(".comment_bar")[0].value = "";
@@ -128,7 +127,7 @@ export function ArticleCard(props){
       />
       setChild([...child_comment, comment_new]);
       
-
+       
 
       }
     }
@@ -138,6 +137,7 @@ export function ArticleCard(props){
       document.querySelectorAll(".black")[0].style.display = "flex";
       document.querySelectorAll(".warning_notice")[0].style.display = "flex";
     }
+    setLoad(1)
     
   }
 
@@ -278,7 +278,15 @@ return(
             <h2 style={{ fontFamily: "'Lato', sans-serif"}}>{props.data.comments.length + child_comment.length} Comments</h2>
             <input  onFocus={handleSubmitButton} onChange={handleChange} type= "text" name="comment" className="comment_bar" id="comment_bar" placeholder='Add a Comment'></input>
             <div className="button_div_comments">
+              {
+                addComm?
+              
                <button onClick={()=>{AddComment(props.data._id,props.user.firebaseUid,props.user.username)}} className="comment_butt">Comment</button>
+               :
+               <div className="loading_page">
+                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+               </div>
+              }
             </div>
 
             <div className="comments" id="comments">

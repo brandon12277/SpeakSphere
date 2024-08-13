@@ -8,6 +8,7 @@ import no_profile from "../static/no-profile.png"
 import Reply from './Reply';
 
 export default function Comment_Box(props){
+  const [addComm,setLoad] = useState(1)
   const [display,setDisp] = useState("block")
   const [child_reply,setChild] = useState([])
     const [reply,setReply] = useState("")
@@ -41,6 +42,7 @@ export default function Comment_Box(props){
         setReply(value);
       };
      async function AddReply(comment_id,id,userid,username){
+         setLoad(null)
            if(!userid){
             console.log(userid)
             document.querySelectorAll("#"+reply_div)[0].value = "";
@@ -95,6 +97,7 @@ export default function Comment_Box(props){
       document.querySelectorAll(".black")[0].style.display = "flex";
       document.querySelectorAll(".warning_notice")[0].style.display = "flex";
         }
+        setLoad(1)
         
       }
 
@@ -124,11 +127,26 @@ export default function Comment_Box(props){
                 <p className="content"><div className="name_det">{props.name} <span className={props.choice}>{props.choice}</span></div> {props.content}</p>
                
                 </div>
-                <button className="replies_butt" onClick={handleReplyBar}>Reply</button>
+                
+                  <button className="replies_butt" onClick={handleReplyBar}>Reply</button>
+                  
+                
+
+                
+                
                 <div id="reply_div" className={reply_div}>
                 <input  onFocus={handleSubmitButton} onChange={handleChange} type= "text" name="comment" id={reply_div} className="comment_bar" placeholder='Add a Comment'></input>
             <div id="reply_div_comments" className={reply_div_bar}>
-               <button onClick={()=>{AddReply(props.comment_id,props._id,props.firebaseUid,props.username)}} className="comment_butt">Reply</button>
+             
+                {
+                  addComm?
+                  <button onClick={()=>{AddReply(props.comment_id,props._id,props.firebaseUid,props.username)}} className="comment_butt">Reply</button>
+                  :
+                  <div className="loading_page">
+                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                 </div>
+              }
+               
             </div>
                 </div>
                 {
