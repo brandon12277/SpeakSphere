@@ -1,4 +1,4 @@
-from flask import Flask, jsonify,request
+from flask import Flask, jsonify,request,make_response
 import numpy as np 
 from flask_cors import CORS
 import joblib
@@ -22,7 +22,7 @@ def simple():
     if request.method == 'OPTIONS':
         response = make_response()
     else:
-        # Your route logic here
+        
         text = request.json
         text = text.get('description')
         text_data= []
