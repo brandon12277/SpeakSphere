@@ -7,6 +7,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import sklearn
+from flask_apscheduler import APScheduler
+import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -16,6 +18,10 @@ with open("english_stopwords.txt", 'r') as file:
 
 model_tree = joblib.load('text_filter_svc.h5')
 vectorizer_text = joblib.load('vectorizer.joblib')
+
+
+
+
 
 @app.route('/simple', methods=['POST'])
 def simple():
@@ -59,6 +65,23 @@ def simple():
 
     return response
    
+@app.route("/getpost",methods=["GET"])
+def get_post():
+    # Respond with an empty JSON object
+    return jsonify({}), 200
+
+def make_request():
+    try:
+        response = requests.get("https://speak-flask-text-api.onrender.com/getpost")
+        if response.status_code == 200:
+            print("Up and running")
+        else:
+            print("Unexpected status code:", response.status_code)
+    except requests.exceptions.RequestException as e:
+        print("Oops! Server down", e)   
 
 if __name__ == '__main__':
+    scheduler = APScheduler()
+    scheduler.add_job(id='Scheduled Task', func=make_request, trigger='interval', minutes=10)
+    scheduler.start()
     app.run(debug=True)
