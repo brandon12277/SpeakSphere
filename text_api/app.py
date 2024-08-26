@@ -82,6 +82,6 @@ def make_request():
 
 if __name__ == '__main__':
     scheduler = APScheduler()
-    scheduler.add_job(id='Scheduled Task', func=make_request, trigger='interval', minutes=10)
+    scheduler.add_job(id='Scheduled Task', func=make_request, trigger='interval', minutes=1)
     scheduler.start()
     app.run(debug=True)
