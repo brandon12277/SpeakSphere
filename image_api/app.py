@@ -25,7 +25,7 @@ os.makedirs("uploads", exist_ok=True)
 model_path  = 'imageFiltermodel'
 
 cnn = tf.saved_model.load(model_path)
-
+infer =cnn.signatures["serving_default"]
 
 class UniqueUIDGenerator:
     def __init__(self):
@@ -60,7 +60,7 @@ def filter():
          img_array = image.img_to_array(img)
    
 
-
+         
 
 
        
@@ -72,8 +72,9 @@ def filter():
          resized_img_array = np.expand_dims(img_array, axis=0)
              
         
-         result = cnn.predict(resized_img_array)
-        
+         input_tensor = tf.convert_to_tensor(resized_img_array)
+         result = infer(input_tensor)
+         result = result['output_0'].numpy() 
 
          class_label = -1
          if result[0][0] == 1:
@@ -83,7 +84,7 @@ def filter():
          else:
             class_label = 2
          
-         print(result[0])
+         
 
          os.remove(url)
 
