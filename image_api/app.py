@@ -9,9 +9,7 @@ from io import BytesIO
 import tensorflow as tf
 from tensorflow.keras.models import load_model # type: ignore
 from tensorflow.keras.preprocessing import image # type: ignore
-import firebase_admin
-from firebase_admin import credentials, storage
-import io
+
 
 
 import base64
