@@ -9,6 +9,10 @@ from io import BytesIO
 import tensorflow as tf
 from tensorflow.keras.models import load_model # type: ignore
 from tensorflow.keras.preprocessing import image # type: ignore
+import firebase_admin
+from firebase_admin import credentials, storage
+import io
+
 
 import base64
 import os
@@ -18,7 +22,12 @@ app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
 
 
+
 os.makedirs("uploads", exist_ok=True)
+model_path  = 'imageFiltermodel'
+
+cnn = tf.saved_model.load(model_path)
+
 
 class UniqueUIDGenerator:
     def __init__(self):
@@ -34,7 +43,7 @@ class UniqueUIDGenerator:
 
 generator = UniqueUIDGenerator()
 
-cnn = load_model('image_filter.h5')
+
 print("IN")
 @app.route('/image_filter',methods=['POST'])
 def filter():

@@ -145,7 +145,7 @@ export function UpdateArticle(){
         let check_img = null
         if(file){
         formImg.append('image', file);
-        check_img = await axios.post('  https://2f7e-45-112-68-67.ngrok-free.app/image_filter',formImg)
+        check_img = await axios.post('https://6ab6-103-51-148-176.ngrok-free.app/image_filter',formImg)
         }
         const check_name = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form_name)
         const check_descp = await axios.post('https://speak-flask-text-api.onrender.com/simple',check_form)
