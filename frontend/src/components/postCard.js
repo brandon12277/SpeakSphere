@@ -17,6 +17,10 @@ export function PostCard(props){
      
            navigate(`/${encodeURIComponent(props.article_name)}/${encodeURIComponent(props.id)}`)
       }
+      const handleUpdateClick = () =>{
+     
+        navigate(`UpdateArticle/${encodeURIComponent(props.article_name)}/${encodeURIComponent(props.id)}`)
+   }
       
       useEffect(() => {
         const handleResize = () => {
@@ -83,7 +87,7 @@ export function PostCard(props){
              <div className='' style={{display:"flex",gap : "10%",marginBottom:"3%"}}>
 
              {props.delete? <div> <button style={{zIndex:"3"}} onClick={handleBlack}  className="delete"><i style={{color:"#78081C",transform:'scale(1.3)'}} class="fa-solid fa-trash"></i></button> </div> : <div></div>}
-             {props.update? <div> <button style={{zIndex:"3"}} onClick={(e)=>{e.preventDefault(); navigate("UpdateArticle/"+props.article_name+"/"+props.id)}}  className="delete"><i style={{color:"#78081C",transform:'scale(1.3)'}} class="fa-solid fa-pen"></i></button> </div> : <div></div>}
+             {props.update? <div> <button style={{zIndex:"3"}} onClick={(e)=>{e.preventDefault(); handleUpdateClick()}}  className="delete"><i style={{color:"#78081C",transform:'scale(1.3)'}} class="fa-solid fa-pen"></i></button> </div> : <div></div>}
              {props.update? <div> <button style={{zIndex:"3"}} onClick={(e)=>{handleClick()}}  className="delete"><i style={{color:"#78081C",transform:'scale(1.3)'}} class="fa-solid fa-eye"></i></button> </div> : <div></div>}
 
              </div>
